@@ -6,6 +6,8 @@ import Navbar from './components/Navbar'
 import ShowCharacter from './components/ShowCharacter'
 import Signup from './components/Signup'
 import Login from './components/Login'
+import AddCharacter from './components/AddCharacter'
+import EditCharacter from './components/EditCharacter'
 
 function App() {
   return <Router>
@@ -16,6 +18,9 @@ function App() {
       <Route path="/characters/:characterId" element={<ShowCharacter />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/characters/newCharacter" element={< AddCharacter/>} />
+      <Route path="/characters/:characterId/editCharacter" element={< EditCharacter/>} />
+  
     </Routes>
   </Router>
 }

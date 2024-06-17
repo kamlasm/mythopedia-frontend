@@ -4,12 +4,12 @@ export function getPayload() {
     if (!token) return false
  
     const parts = token.split('.')
- 
+    console.log(JSON.parse(atob(parts[1])));
     return JSON.parse(atob(parts[1]))
  }
  
- export function isAddedBy(userId) {
+ export function isAdmin() {
      const playload = getPayload()
      if(!playload) return false
-     return userId === playload.userId
+     if(playload.userIsAdmin) return true
  }
