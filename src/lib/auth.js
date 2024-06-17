@@ -13,3 +13,9 @@ export function getPayload() {
      if(!playload) return false
      if(playload.userIsAdmin) return true
  }
+
+ export function getUserId() {
+    const playload = getPayload()
+    if(!playload) return false
+    return playload.userId
+ }
