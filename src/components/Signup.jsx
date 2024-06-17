@@ -22,10 +22,11 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            await axios.post('/api/signup', formData)
-            toast.success('Signup was successful!', {
-                onClose: () => navigate('/login')
-            });
+            await axios.post('/api/sign-up', formData)
+            // toast.success('Signup was successful!', {
+            //     onClose: () => navigate('/login')
+            // });
+            navigate('/login')
         } catch (err) {
             console.log(err);
         }

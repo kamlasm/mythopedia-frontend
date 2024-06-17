@@ -25,7 +25,7 @@ export default function Login() {
 
             localStorage.setItem('token', token);
 
-            navigate('/cheeses')
+            navigate('/characters')
 
         } catch (err) {
             console.log(err);
