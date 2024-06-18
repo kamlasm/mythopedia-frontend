@@ -37,8 +37,8 @@ const Team = () => {
     }
 
     useEffect(() => {
-        fetchMonster()
         fetchUser()
+        fetchMonster()
     }, [])
 
     async function playHandle() {
@@ -47,6 +47,20 @@ const Team = () => {
             const winner = true
             setWinner(winner)
 
+            let newLevel= level
+        if (level < 5) {
+            newLevel = level+1
+            setLevel(newLevel)
+        }
+        const newMoney = money + 50
+        setMoney(newMoney)
+        console.log(money);
+
+        const token = localStorage.getItem('token')
+        await axios.put('api/game', { newMoney, newLevel }, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+
         } else {
             const winner = false
             setWinner(winner)
@@ -54,21 +68,25 @@ const Team = () => {
         console.log(winner);
 
     }
-    async function nextLevelHandle() {
-        let newLevel = level
-        if (level < 5) {
-            newLevel = level++
-            setLevel(newLevel)
-        }
-        const newmoney = money + 50
-        setMoney(newmoney)
-
-        const token = localStorage.getItem('token')
-        await axios.put('api/your-team', { newMoney, newLevel }, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+    async function nextLevelHandle(){
+        fetchUser()
         fetchMonster()
     }
+
+    // async function nextLevelHandle() {
+    //     let newLevel = level
+    //     if (level < 5) {
+    //         newLevel = level++
+    //         setLevel(newLevel)
+    //     }
+    //     const newmoney = money + 50
+    //     setMoney(newmoney)
+
+    //     const token = localStorage.getItem('token')
+    //     await axios.put('api/your-team', { newMoney, newLevel }, {
+    //         headers: { Authorization: `Bearer ${token}` }
+    //     })
+    // }
 
 
 
