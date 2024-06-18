@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Team = () => {
+    const navigate = useNavigate()
 
     const [team, setTeam] = useState([])
     const [money, setMoney] = useState(0)
@@ -47,30 +48,29 @@ const Team = () => {
             const winner = true
             setWinner(winner)
 
-            let newLevel= level
-        if (level < 5) {
-            newLevel = level+1
-            setLevel(newLevel)
-        }
-        const newMoney = money + 50
-        setMoney(newMoney)
-        console.log(money);
+            let newLevel = level
+            if (level < 6) {
+                newLevel = level + 1
+                setLevel(newLevel)
+            } 
 
-        const token = localStorage.getItem('token')
-        await axios.put('api/game', { newMoney, newLevel }, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+            const newMoney = money + 50
+            setMoney(newMoney)
+
+            const token = localStorage.getItem('token')
+            await axios.put('api/game', { newMoney, newLevel }, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
 
         } else {
             const winner = false
             setWinner(winner)
         }
-        console.log(winner);
-
     }
-    async function nextLevelHandle(){
-        fetchUser()
-        fetchMonster()
+
+    async function nextLevelHandle() {
+        await fetchUser()
+        await fetchMonster()
     }
 
     // async function nextLevelHandle() {
@@ -88,7 +88,28 @@ const Team = () => {
     //     })
     // }
 
+    async function handleReset() {
+        navigate('/your-team')
+        const newMoney = 100
+        setMoney(newMoney)
+        const newStrength = 0
+        setStrength(newStrength)
+        const newIntelligence = 0
+        setIntelligence(newIntelligence)
+        const newLevel = 1
+        setLevel(newLevel)
+        const newTeam = []
+        setTeam(newTeam)
 
+        const token = localStorage.getItem('token')
+        await axios.put('api/your-team', { newMoney, newLevel, newStrength, newIntelligence, newTeam }, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+        setIsHidden(true)
+        setWinner(false)
+        
+        
+    }
 
     if (level < 1) {
         return <div className="section">
@@ -107,21 +128,29 @@ const Team = () => {
         <h3>Money: {money}</h3>
         <h3>Team Strength: {strength}</h3>
         <h3>Team Intelligence: {intelligence}</h3>
+        <h3>Level: {level}</h3>
 
-        {isHidden && <button className="button is-primary" onClick={playHandle}>Play</button>}
+        {isHidden && <div>
+        <button className="button is-primary" onClick={playHandle}>Play</button>
+        <Link to='/your-team' className="button is-warning">Rebuild Team</Link>
+        </div>}
         {isHidden ? ""
+            : winner && level === 6 ? <div>
+                 <p className="has-background-success-light has-text-primary-dark">Congratulations, you win the game! Reset and play again.</p>
+                 <button className="button is-primary " onClick={handleReset}>Reset</button>               
+            </div>
             : winner ? <div>
-                <p className="has-background-success-light has-text-primary-dark">Congratulations, your team is the best. Try the next level</p>
+                <p className="has-background-success-light has-text-primary-dark">Congratulations, your team is the best! Try the next level.</p>
                 <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
             </div>
                 : <div>
-                    <p className="has-background-danger-light has-text-danger">Buuuuu, your team is the wort. go back and rebuild your team</p>
+                    <p className="has-background-danger-light has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</p>
                     <Link className="button is-primary" to="/your-team">Try again</Link>
                 </div>}
         <div>
             <h2 className="title">Team Members</h2>
             <div className="columns is-multiline is-mobile">
-                {team.map((character, index) => {
+                {team.map((character) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
                         key={character.name}>
                         <p>{character.name}</p>

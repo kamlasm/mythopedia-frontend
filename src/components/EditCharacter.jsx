@@ -22,18 +22,23 @@ export default function EditCharacter() {
 
     useEffect(() => {
         async function fetchCharacter() {
-            const resp = await fetch(`/api/characters/${characterId}`)
-            const data = await resp.json()
-            await setFormData({
-                name: `${data.name}`,
-                description: `${data.description}`,
-                type: `${data.type}`,
-                images: `${data.images}`,
-                relatives: `${data.relatives}`,
-                strength: `${data.strength}`,
-                intelligence: `${data.intelligence}`,
-                cost: `${data.cost}`,
-            })
+            try {
+                const resp = await fetch(`/api/characters/${characterId}`)
+                const data = await resp.json()
+                await setFormData({
+                    name: `${data.name}`,
+                    description: `${data.description}`,
+                    type: `${data.type}`,
+                    images: `${data.images}`,
+                    relatives: `${data.relatives}`,
+                    strength: `${data.strength}`,
+                    intelligence: `${data.intelligence}`,
+                    cost: `${data.cost}`,
+                })
+            } catch (err) {
+                console.log(err);
+            }
+
         }
         fetchCharacter()
     }, [characterId])
@@ -48,13 +53,9 @@ export default function EditCharacter() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            const { data } = await axios.put(`/api//characters/${characterId}`, formData, {
+            await axios.put(`/api//characters/${characterId}`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(data);
-            // toast.success('Signup was successful!', {
-            //     onClose: () => navigate('/login')
-            // });
             navigate('/characters')
         } catch (err) {
             console.log(err);

@@ -11,6 +11,8 @@ export default function Login() {
         password: '',
     })
 
+    const [error, setError] = useState('')
+
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
@@ -24,16 +26,17 @@ export default function Login() {
             const token = data.token;
 
             localStorage.setItem('token', token);
-
-            navigate('/characters')
+            
+            navigate('/your-team')
 
         } catch (err) {
-            console.log(err);
+            setError(err.response.data.message)
         }
     }
 
 
     return <div className="section">
+        <p>{error}</p>
         <div className="container">
             <h1 className="title">Login</h1>
             <form onSubmit={handleSubmit}>

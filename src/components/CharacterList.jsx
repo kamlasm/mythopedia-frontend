@@ -1,30 +1,33 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 
 const CharacterList = () => {
   const [characters, setCharacters] = useState([])
-
+  const [error, setError] = useState('')
 
   useEffect(() => {
     async function fetchCharacters() {
-      const resp = await fetch('/api/characters')
-      const data = await resp.json()
-      setCharacters(data)
+      try {
+        const resp = await axios.get('/api/characters')
+        setCharacters(resp.data)       
+      } catch (err) {
+        const error = err.response.data.message
+        setError(error)        
+      }
     }
     fetchCharacters()
   }, [])
 
-
-
   return <div className="section">
+    <p>{error}</p>
     <div className="container">
 
       <div className="columns is-multiline is-mobile">
         {characters.map((character) => {
           return <div
             className="column is-one-third-desktop is-half-tablet is-half-mobile"
-            key={character}
+            key={character.name}
           >
             <Link to={`/characters/${character._id}`}>
               <div className="card">

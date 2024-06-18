@@ -14,6 +14,8 @@ export default function Signup() {
         passwordConfirmation: '',
     })
 
+    const [error, setError] = React.useState('')
+
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
@@ -22,17 +24,18 @@ export default function Signup() {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            await axios.post('/api/sign-up', formData)
-            // toast.success('Signup was successful!', {
-            //     onClose: () => navigate('/login')
-            // });
-            navigate('/login')
+            const { data } = await axios.post('/api/sign-up', formData)
+            const token = data.token;
+            localStorage.setItem('token', token);
+
+            navigate('/your-team')
         } catch (err) {
-            console.log(err);
+            setError(err.response.data.message)
         }
     }
 
     return <div className="section">
+        <p>{error}</p>
         <div className="container">
        
             <h1 className="title">Sign Up</h1>

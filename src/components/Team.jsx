@@ -50,9 +50,9 @@ const Team = () => {
             setStrength(newStrength)
             const newIntelligence = intelligence + character.intelligence
             setIntelligence(newIntelligence)
-
+            const newLevel = level
             const token = localStorage.getItem('token')
-            await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam }, {
+            await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         }
@@ -69,9 +69,9 @@ const Team = () => {
         setStrength(newStrength)
         const newIntelligence = intelligence - character.intelligence
         setIntelligence(newIntelligence)
-
+        const newLevel = level
         const token = localStorage.getItem('token')
-        await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam }, {
+        await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
             headers: { Authorization: `Bearer ${token}` }
         })
     }
@@ -120,7 +120,7 @@ const Team = () => {
             <div className="columns is-multiline is-mobile">
                 {characters.map((character) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
-                        key={character.name}>
+                        key={character._id}>
                         <p>{character.name}</p>
                         {/* <figure className="image is-128x128">
                         <img src={character.images.regular} alt={character.name}/>
