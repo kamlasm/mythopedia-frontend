@@ -19,8 +19,17 @@ const CharacterList = () => {
     fetchCharacters()
   }, [])
 
+  if (characters.length < 1) {
+    return <div className="section">
+      <div className="container">
+        <div className="title">
+          {error ? error : "Loading ..."}      
+        </div>
+      </div>
+    </div>
+  }
+
   return <div className="section">
-    <p>{error}</p>
     <div className="container">
 
       <div className="columns is-multiline is-mobile">

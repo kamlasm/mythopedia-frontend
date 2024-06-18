@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
@@ -7,7 +7,7 @@ export default function AddCharacter() {
 
     const navigate = useNavigate()
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         name: '',
         description: '',
         type: '',
@@ -18,6 +18,7 @@ export default function AddCharacter() {
         cost: '',
 
     })
+    const [error, setError] = useState('')
 
     function handleChange(e) {
         const newFormData = structuredClone(formData)
@@ -28,20 +29,18 @@ export default function AddCharacter() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            const { data } = await axios.post('/api/characters', formData, {
+            await axios.post('/api/characters', formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            console.log(data);
-            // toast.success('Signup was successful!', {
-            //     onClose: () => navigate('/login')
-            // });
             navigate('/characters')
         } catch (err) {
-            console.log(err);
+            const error = err.response.data.message
+            setError(error)
         }
     }
 
     return <div className="section">
+        <p>{error}</p>
         <div className="container">
 
             <h1 className="title">Add Character</h1>

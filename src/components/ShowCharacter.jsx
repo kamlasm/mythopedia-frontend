@@ -10,16 +10,35 @@ const Character = () => {
 
   const { characterId } = useParams()
   const [character, setCharacter] = useState({})
+  const [error, setError] = useState('')
 
   useEffect(() => {
     async function fetchCharacter() {
-      const resp = await fetch(`/api/characters/${characterId}`)
-      const data = await resp.json()
-      getPayload()
-      setCharacter(data)
+      try {
+        const resp = await axios.get(`/api/characters/${characterId}`)
+        getPayload()
+        setCharacter(resp.data)
+      } catch (err) {
+        const error = err.response.data.message
+        setError(error)
+      }
+
     }
     fetchCharacter()
   }, [characterId])
+
+  async function handleDelete() {
+    try {
+      const token = localStorage.getItem('token')
+      await axios.delete(`/api/characters/${characterId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      navigate('/characters')
+    } catch (err) {
+      const error = err.response.data.message
+      setError(error)
+    }
+  }
 
   if (!character.name) {
     return <div className="section">
@@ -31,20 +50,8 @@ const Character = () => {
     </div>
   }
 
-
-  async function handleDelete() {
-    try {
-      const token = localStorage.getItem('token')
-      await axios.delete(`/api/characters/${characterId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      navigate('/characters')
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  }
-
   return <div className="section">
+    <p>{error}</p>
     <div className="container">
       <h1 className="title">{character.name}</h1>
       <h2 className="subtitle">{character.type}</h2>
@@ -52,6 +59,7 @@ const Character = () => {
       <img src={character.images.regular} alt={character.name} />
       {isAdmin() && <button className='button is-danger' onClick={handleDelete}>Delete</button>}
       {isAdmin() && <Link to={`/characters/${character._id}/editCharacter`} className='button is-warning' >Edit</Link>}
+      <Link to='/characters' className='button is-primary' >Back to Character List</Link>
     </div>
 
   </div>

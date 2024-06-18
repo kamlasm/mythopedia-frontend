@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useNavigate, useParams} from "react-router-dom"
+import { useNavigate, useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react'
 
 
@@ -19,13 +19,14 @@ export default function EditCharacter() {
         cost: '',
 
     })
+    const [error, setError] = useState('')
 
     useEffect(() => {
         async function fetchCharacter() {
             try {
                 const resp = await fetch(`/api/characters/${characterId}`)
                 const data = await resp.json()
-                await setFormData({
+                setFormData({
                     name: `${data.name}`,
                     description: `${data.description}`,
                     type: `${data.type}`,
@@ -36,7 +37,8 @@ export default function EditCharacter() {
                     cost: `${data.cost}`,
                 })
             } catch (err) {
-                console.log(err);
+                const error = err.response.data.message
+                setError(error)  
             }
 
         }
@@ -53,19 +55,21 @@ export default function EditCharacter() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            await axios.put(`/api//characters/${characterId}`, formData, {
+            await axios.put(`/api/characters/${characterId}`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            navigate('/characters')
+            navigate(`/characters/${characterId}`)
         } catch (err) {
-            console.log(err);
+            const error = err.response.data.message
+            setError(error)
         }
     }
 
     return <div className="section">
+        <p>{error}</p>
         <div className="container">
 
-            <h1 className="title">edit Character</h1>
+            <h1 className="title">Edit Character</h1>
             <form onSubmit={handleSubmit}>
                 <div className="field">
                     <label className="label">Name</label>
@@ -166,6 +170,7 @@ export default function EditCharacter() {
                 </div>
                 <button className="button">Submit</button>
             </form>
+            <Link to={`/characters/${characterId}`} className='button is-warning' >Back to {formData.name}</Link>
         </div>
     </div>
 }
