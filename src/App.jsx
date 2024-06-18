@@ -9,6 +9,7 @@ import Login from './components/Login'
 import AddCharacter from './components/AddCharacter'
 import EditCharacter from './components/EditCharacter'
 import Team from './components/Team'
+import Game from './components/Game'
 
 function App() {
   return <Router>
@@ -22,6 +23,7 @@ function App() {
       <Route path="/characters/newCharacter" element={< AddCharacter/>} />
       <Route path="/characters/:characterId/editCharacter" element={< EditCharacter/>} />
       <Route path="/your-team" element={< Team/>} />
+      <Route path="/game" element={< Game/>} />
     </Routes>
   </Router>
 }

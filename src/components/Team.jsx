@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 const Team = () => {
 
@@ -7,6 +8,7 @@ const Team = () => {
     const [money, setMoney] = useState(0)
     const [strength, setStrength] = useState(0)
     const [intelligence, setIntelligence] = useState(0)
+    const [level, setLevel] = useState(0)
 
     const [characters, setCharacters] = useState([])
 
@@ -19,6 +21,7 @@ const Team = () => {
         setMoney(gameplay.money)
         setStrength(gameplay.totalStrength)
         setIntelligence(gameplay.totalIntelligence)
+        setLevel(gameplay.level)
     }
 
     useEffect(() => {
@@ -73,11 +76,23 @@ const Team = () => {
         })
     }
 
+
+    if (level<1) {
+        return <div className="section">
+          <div className="container">
+            <div className="title">
+              Loading ...
+            </div>
+          </div>
+        </div>
+      }
+
     return <>
         <h1 className="title">Your Team</h1>
         <h3>Money: {money}</h3>
         <h3>Team Strength: {strength}</h3>
         <h3>Team Intelligence: {intelligence}</h3>
+        <Link to="/game" className="button is-primary">start the game</Link>
 
         <div>
             <h2 className="title">Team Members</h2>
