@@ -10,8 +10,10 @@ const Home = () => {
           <h2 className="title">
           ⚡GODS⚡
           </h2>
+          <div className="buttons" id="homeButtons">
           <Link to="/signup" className="button is-primary">Sign Up</Link>
           <Link to="/login" className="button is-primary">Log In</Link>
+          </div>
         </div>
       </div>
     </div>

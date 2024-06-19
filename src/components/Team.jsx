@@ -50,7 +50,7 @@ const Team = () => {
 
     async function handleAdd(character) {
         if (character.cost > money) {
-            console.log('not enough money')
+            setError('not enough money')
         } else {
             const newTeam = structuredClone(team)
             newTeam.push(character)

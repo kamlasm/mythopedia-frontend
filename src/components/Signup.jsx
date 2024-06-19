@@ -39,7 +39,7 @@ export default function Signup() {
         <div className="container">
        
             <h1 className="title">Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} class="box">
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">
@@ -49,6 +49,7 @@ export default function Signup() {
                             name={'username'}
                             onChange={handleChange}
                             value={formData.username}
+                            placeholder="username"
                         />
                     </div>
                 </div>
@@ -61,6 +62,7 @@ export default function Signup() {
                             name={'email'}
                             onChange={handleChange}
                             value={formData.email}
+                            placeholder="e.g. name@email.com"
                         />
                     </div>
                 </div>
@@ -73,6 +75,7 @@ export default function Signup() {
                             name={'password'}
                             onChange={handleChange}
                             value={formData.password}
+                            placeholder="********"
                         />
                     </div>
                 </div>
@@ -85,6 +88,7 @@ export default function Signup() {
                             name={'passwordConfirmation'}
                             onChange={handleChange}
                             value={formData.passwordConfirmation}
+                            placeholder="********"
                         />
                     </div>
                 </div>

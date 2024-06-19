@@ -18,11 +18,11 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/characters" element={<CharacterList />} />
-      <Route path="/characters/:characterId" element={<ShowCharacter />} />
+      <Route path="/characters/:characterName" element={<ShowCharacter />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/characters/newCharacter" element={< AddCharacter/>} />
-      <Route path="/characters/:characterId/editCharacter" element={< EditCharacter/>} />
+      <Route path="/characters/:characterName/editCharacter" element={< EditCharacter/>} />
       <Route path="/your-team" element={< Team/>} />
       <Route path="/game" element={< Game/>} />
     </Routes>

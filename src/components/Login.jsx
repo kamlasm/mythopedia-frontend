@@ -39,7 +39,7 @@ export default function Login() {
         <p>{error}</p>
         <div className="container">
             <h1 className="title">Login</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="box">
 
                 <div className="field">
                     <label className="label">Email</label>
@@ -50,6 +50,7 @@ export default function Login() {
                             name={'email'}
                             onChange={handleChange}
                             value={formData.email}
+                            placeholder="e.g. name@email.com"
                         />
                     </div>
                 </div>
@@ -63,6 +64,7 @@ export default function Login() {
                             name={'password'}
                             onChange={handleChange}
                             value={formData.password}
+                            placeholder="********"
                         />
                     </div>
                 </div>

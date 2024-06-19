@@ -71,7 +71,7 @@ const CharacterList = () => {
             className="column is-one-third-desktop is-half-tablet is-half-mobile"
             key={character.name}
           >
-            <Link to={`/characters/${character._id}`}>
+            <Link to={`/characters/${character.name}`}>
               <div className="card">
                 <div className="card-content">
                   <div className="media">

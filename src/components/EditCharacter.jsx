@@ -7,7 +7,7 @@ export default function EditCharacter() {
 
     const navigate = useNavigate()
 
-    const { characterId } = useParams()
+    const { characterName } = useParams()
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -24,7 +24,7 @@ export default function EditCharacter() {
     useEffect(() => {
         async function fetchCharacter() {
             try {
-                const resp = await fetch(`/api/characters/${characterId}`)
+                const resp = await fetch(`/api/characters/${characterName}`)
                 const data = await resp.json()
                 setFormData({
                     name: `${data.name}`,
@@ -43,7 +43,7 @@ export default function EditCharacter() {
 
         }
         fetchCharacter()
-    }, [characterId])
+    }, [characterName])
 
 
     function handleChange(e) {
@@ -55,15 +55,16 @@ export default function EditCharacter() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            await axios.put(`/api/characters/${characterId}`, formData, {
+            await axios.put(`/api/characters/${characterName}`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            navigate(`/characters/${characterId}`)
+            navigate(`/characters/${characterName}`)
         } catch (err) {
             const error = err.response.data.message
             setError(error)
         }
     }
+    
 
     return <div className="section">
         <p>{error}</p>
@@ -75,7 +76,7 @@ export default function EditCharacter() {
                     <label className="label">Name</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'name'}
                             onChange={handleChange}
@@ -87,7 +88,7 @@ export default function EditCharacter() {
                     <label className="label">Description</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'description'}
                             onChange={handleChange}
@@ -99,7 +100,7 @@ export default function EditCharacter() {
                     <label className="label">Type</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'type'}
                             onChange={handleChange}
@@ -111,7 +112,7 @@ export default function EditCharacter() {
                     <label className="label">Images</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'images'}
                             onChange={handleChange}
@@ -124,7 +125,7 @@ export default function EditCharacter() {
                     <label className="label">Relatives</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'relatives'}
                             onChange={handleChange}
@@ -136,7 +137,7 @@ export default function EditCharacter() {
                     <label className="label">Strength</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'strength'}
                             onChange={handleChange}
@@ -148,7 +149,7 @@ export default function EditCharacter() {
                     <label className="label">Intelligence</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'intelligence'}
                             onChange={handleChange}
@@ -160,7 +161,7 @@ export default function EditCharacter() {
                     <label className="label">Cost</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'cost'}
                             onChange={handleChange}
@@ -170,7 +171,7 @@ export default function EditCharacter() {
                 </div>
                 <button className="button">Submit</button>
             </form>
-            <Link to={`/characters/${characterId}`} className='button is-warning' >Back to {formData.name}</Link>
+            <Link to={`/characters/${characterName}`} className='button is-warning' >Back to {formData.name}</Link>
         </div>
     </div>
 }
