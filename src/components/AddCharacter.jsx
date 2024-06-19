@@ -12,19 +12,44 @@ export default function AddCharacter() {
         description: '',
         type: '',
         images: '',
-        relatives: '',
+        relatives: {father: '', mother: '', spouses: [], lovers: [], children: [], siblings: []},
         strength: '',
         intelligence: '',
         cost: '',
-
+        isPlayable: false,
     })
-    const [error, setError] = useState('')
 
+    const [error, setError] = useState('')
+    console.log(formData)
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
         setFormData(newFormData)
     }
+
+    function handleRelatives(e) {
+        const newFormData = structuredClone(formData)
+        newFormData.relatives[e.target.name] = e.target.value
+        setFormData(newFormData)
+    }
+
+    function handleRelativesArray(e) {
+        const newFormData = structuredClone(formData)
+        const newArray = e.target.value.split(',')
+        newFormData.relatives[e.target.name] = newArray
+        setFormData(newFormData)
+    }
+
+    function handleSelect(e) {
+        const newFormData = structuredClone(formData)
+        if (e.target.checked) {
+            newFormData[e.target.name] = true
+        } else {
+            newFormData[e.target.name] = false  
+        }
+        setFormData(newFormData)
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
         try {
@@ -95,17 +120,83 @@ export default function AddCharacter() {
                 </div>
 
                 <div className="field">
-                    <label className="label">Relatives</label>
+                    <label className="label">Father</label>
                     <div className="control">
                         <input
                             className="input"
                             type="text"
-                            name={'relatives'}
-                            onChange={handleChange}
-                            value={formData.relatives}
+                            name={'father'}
+                            onChange={handleRelatives}
+                            value={formData.relatives.father}
                         />
                     </div>
                 </div>
+
+                <div className="field">
+                    <label className="label">Mother</label>
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            name={'mother'}
+                            onChange={handleRelatives}
+                            value={formData.relatives.mother}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Spouses</label>
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            name={'spouses'}
+                            onChange={handleRelativesArray}
+                            value={formData.relatives.spouses}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Lovers</label>
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            name={'lovers'}
+                            onChange={handleRelativesArray}
+                            value={formData.relatives.lovers}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Children</label>
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            name={'children'}
+                            onChange={handleRelativesArray}
+                            value={formData.relatives.children}
+                        />
+                    </div>
+                </div>
+
+                <div className="field">
+                    <label className="label">Siblings</label>
+                    <div className="control">
+                        <input
+                            className="input"
+                            type="text"
+                            name={'siblings'}
+                            onChange={handleRelativesArray}
+                            value={formData.relatives.siblings}
+                        />
+                    </div>
+                </div>
+
                 <div className="field">
                     <label className="label">Strength</label>
                     <div className="control">
@@ -139,6 +230,18 @@ export default function AddCharacter() {
                             name={'cost'}
                             onChange={handleChange}
                             value={formData.cost}
+                        />
+                    </div>
+                </div>
+                <div className="field">
+                    <label className="label">Is playable</label>
+                    <div className="control">
+                        <input
+                            type="checkbox"
+                            name={'isPlayable'}
+                            onChange={handleSelect}
+                            value={formData.isPlayable}
+                            checked={formData.isPlayable}
                         />
                     </div>
                 </div>
