@@ -108,17 +108,23 @@ const Team = () => {
         </div>
     }
 
-    return <>
+    return <div className="section">
         <p>{error}</p>
-        <h1 className="title">Your Team</h1>
-        <h3>Money: {money}</h3>
-        <h3>Team Strength: {strength}</h3>
-        <h3>Team Intelligence: {intelligence}</h3>
-        <Link to="/game" className="button is-primary">Start the Game</Link>
+        <div className="container team-page">
+            <h1 className="title">Your Team</h1>
+            <h2 className="subtitle">Build your team to battle against the monsters. When you've chosen your team, click on 'Ready to Play'.</h2>
+            <h3>Money: {money}</h3>
+            <h3>Team Strength: {strength}</h3>
+            <h3>Team Intelligence: {intelligence}</h3>
+            <div className="buttons">
+                <Link to="/game" ><button className="button is-primary">Ready to Play</button></Link>
+            </div>
+        </div>
 
-        <div>
-            <h2 className="title">Team Members</h2>
-            <div className="columns is-multiline is-mobile">
+        <div className="container team-page">
+            <h2 className="title is-4">Team Members</h2>
+            <p className="subtitle">{team.length === 0 && "Pick some team members!"}</p>
+            <div className="columns is-multiline is-mobile">               
                 {team.map((character, index) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
                         key={character.name}>
@@ -126,15 +132,16 @@ const Team = () => {
                             <div className="card-content">
                                 <div className="media">
                                     <div className="media-content">
-                                        <p>{character.name}</p>
-                                        {/* <figure className="image is-128x128">
-                           <img src={character.images} alt={character.name}/>
-                       </figure> */}
-
+                                        <h2 className="title is-5">{character.name}</h2>
+                                        <figure className="image is-128x128">
+                                            <img src={character.images} alt={character.name} className="image is-128x128" />
+                                        </figure>
                                         <p>Cost: {character.cost}</p>
                                         <p>Strength: {character.strength}</p>
                                         <p>Intelligence: {character.intelligence}</p>
-                                        <button className="button is-primary" onClick={() => handleRemove(character, index)}>Remove</button>
+                                        <div className="buttons">
+                                            <button className="button is-danger" onClick={() => handleRemove(character, index)}>Remove</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -142,11 +149,10 @@ const Team = () => {
                     </div>
                 })}
             </div>
-
         </div>
 
-        <div>
-            <h2 className="title">Options</h2>
+        <div className="container team-page">
+            <h2 className="title">Choose from these characters</h2>
             <div className="columns is-multiline is-mobile">
                 {characters.map((character) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
@@ -155,15 +161,16 @@ const Team = () => {
                             <div className="card-content">
                                 <div className="media">
                                     <div className="media-content">
-                                        <h2 className="title is-4">{character.name}</h2>
-                                        {/* <figure className="image is-128x128">
-                        <img src={character.images} alt={character.name}/>
-                    </figure> */}
-
+                                        <h2 className="title is-5">{character.name}</h2>
+                                        <figure className="image is-128x128">
+                                            <img src={character.images} alt={character.name} className="image is-128x128" />
+                                        </figure>
                                         <p>Cost: {character.cost}</p>
                                         <p>Strength: {character.strength}</p>
                                         <p>Intelligence: {character.intelligence}</p>
-                                        <button className="button is-primary" onClick={() => handleAdd(character)}>Add</button>
+                                        <div className="buttons">
+                                            <button className="button is-warning" onClick={() => handleAdd(character)}>Add</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +179,7 @@ const Team = () => {
                 })}
             </div>
         </div>
-    </>
+    </div>
 
 }
 
