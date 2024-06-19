@@ -76,21 +76,29 @@ const Character = () => {
         {character.relatives.spouses?.length > 0 && (
           <div className='column'>
             <p>Spouses:</p>
+            <ul>
             {character.relatives.spouses.map((spouse, index) => (
+              <li key={index}>
               <Link key={index} to={`/characters/${spouse}`}>
                 {spouse}
               </Link>
+              </li>
             ))}
+            </ul>
           </div>
         )}
         {character.relatives.lovers?.length > 0 && (
           <div className='column'>
             <p>Lovers:</p>
+            <ul>
             {character.relatives.lovers.map((lover, index) => (
+              <li key={index}>
               <Link key={index} to={`/characters/${lover}`}>
                 {lover}
               </Link>
+              </li>
             ))}
+            </ul>
           </div>
         )}
         {character.relatives.children?.length > 0 && (

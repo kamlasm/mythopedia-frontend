@@ -92,7 +92,7 @@ export default function Signup() {
                         />
                     </div>
                 </div>
-                <button className="button">Submit</button>
+                <button className="button is-primary">Submit</button>
             </form>
         </div>
     </div>

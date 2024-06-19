@@ -95,7 +95,7 @@ export default function EditCharacter() {
         <div className="container">
 
             <h1 className="title">Edit Character</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="box">
                 <div className="field">
                     <label className="label">Name</label>
                     <div className="control">
@@ -270,7 +270,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
-                <button className="button">Submit</button>
+                <button className="button is-primary">Submit</button>
             </form>
             <Link to={`/characters/${characterName}`} className='button is-warning' >Back to {formData.name}</Link>
         </div>
