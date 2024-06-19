@@ -69,7 +69,7 @@ export default function AddCharacter() {
         <div className="container">
 
             <h1 className="title">Add Character</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="box">
                 <div className="field">
                     <label className="label">Name</label>
                     <div className="control">
@@ -245,7 +245,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
-                <button className="button">Submit</button>
+                <button className="button is-primary">Submit</button>
             </form>
         </div>
     </div>

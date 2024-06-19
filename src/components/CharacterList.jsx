@@ -59,12 +59,16 @@ const CharacterList = () => {
 
   return <div className="section">
     <div className="container">
-    
+      <div className='buttons'>
       <button value="God" onClick={getCharacterType} className='button'>God</button>
       <button value="Titan" onClick={getCharacterType} className='button'>Titan</button>
       <button value="Hero" onClick={getCharacterType} className='button'>Hero</button>
       <button onClick={resetHandler} className='button'>Reset</button>
+      </div>
+      <div className="field">
       <input className='input' placeholder='Search your character here' onChange={handleInput}></input>
+      </div>
+      <div className="container">
       <div className="columns is-multiline is-mobile">
         {filterCharacters().map((character)=> {
           return <div
@@ -95,7 +99,7 @@ const CharacterList = () => {
           </div>
         })}
       </div>
-
+      </div>
     </div>
   </div>
 }
