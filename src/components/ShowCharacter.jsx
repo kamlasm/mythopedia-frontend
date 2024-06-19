@@ -56,10 +56,15 @@ const Character = () => {
       <h1 className="title">{character.name}</h1>
       <h2 className="subtitle">{character.type}</h2>
       <h2 className="subtitle">{character.description}</h2>
-      <img src={character.images.regular} alt={character.name} />
+      <figure class="image is-center">
+      <img src={character.images} alt={character.name} />
+      </figure>
+      <div  className='buttons'>
       {isAdmin() && <button className='button is-danger' onClick={handleDelete}>Delete</button>}
       {isAdmin() && <Link to={`/characters/${character._id}/editCharacter`} className='button is-warning' >Edit</Link>}
+      
       <Link to='/characters' className='button is-primary' >Back to Character List</Link>
+    </div>
     </div>
 
   </div>

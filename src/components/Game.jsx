@@ -66,11 +66,15 @@ const Team = () => {
 
             const newMoney = money + 50
             setMoney(newMoney)
-
-            const token = localStorage.getItem('token')
-            await axios.put('api/game', { newMoney, newLevel }, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
+            try {
+                const token = localStorage.getItem('token')
+                await axios.put('api/game', { newMoney, newLevel }, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            } catch (err) {
+                const error = err.response.data.message
+                setError(error)
+            }
 
         } else {
             const winner = false
@@ -95,11 +99,15 @@ const Team = () => {
         setLevel(newLevel)
         const newTeam = []
         setTeam(newTeam)
-
-        const token = localStorage.getItem('token')
-        await axios.put('api/your-team', { newMoney, newLevel, newStrength, newIntelligence, newTeam }, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+        try {
+            const token = localStorage.getItem('token')
+            await axios.put('api/your-team', { newMoney, newLevel, newStrength, newIntelligence, newTeam }, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        } catch (err) {
+            const error = err.response.data.message
+            setError(error)
+        }
         setIsHidden(true)
         setWinner(false)
     }
@@ -153,7 +161,7 @@ const Team = () => {
                                     <div className="media-content">
                                         <p>{character.name}</p>
                                         {/* <figure className="image is-128x128">
-                           <img src={character.images.regular} alt={character.name}/>
+                           <img src={character.images} alt={character.name}/>
                        </figure> */}
 
                                         <p>Cost: {character.cost}</p>
@@ -172,7 +180,7 @@ const Team = () => {
             {/* <figure className="image is-128x128">
                            <img src={monster.image} alt={monster.name}/>
                        </figure> */}
-                       
+
             <p className="subtitle">{monster.name}</p>
             <p>Strength: {isHidden ? "???" : monster.strength}</p>
             <p>Intelligence: {isHidden ? "???" : monster.intelligence}</p>

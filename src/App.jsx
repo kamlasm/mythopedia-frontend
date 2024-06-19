@@ -10,6 +10,7 @@ import AddCharacter from './components/AddCharacter'
 import EditCharacter from './components/EditCharacter'
 import Team from './components/Team'
 import Game from './components/Game'
+import './App.css'
 
 function App() {
   return <Router>

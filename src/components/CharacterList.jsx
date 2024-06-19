@@ -5,19 +5,47 @@ import axios from 'axios'
 const CharacterList = () => {
   const [characters, setCharacters] = useState([])
   const [error, setError] = useState('')
+  const [characterFilter, setCharacterFilter] = useState('')
+  const [charactersType, setCharactersType] = useState("")
+  
 
-  useEffect(() => {
-    async function fetchCharacters() {
-      try {
-        const resp = await axios.get('/api/characters')
-        setCharacters(resp.data)       
-      } catch (err) {
-        const error = err.response.data.message
-        setError(error)        
-      }
+  async function fetchCharacters() {
+    try {
+      const resp = await axios.get('/api/characters')
+      setCharacters(resp.data)       
+    } catch (err) {
+      const error = err.response.data.message
+      setError(error)        
     }
+  }
+  useEffect(() => {
     fetchCharacters()
   }, [])
+
+  function handleInput(e){
+    setCharacterFilter(e.target.value)
+  }
+
+  function filterCharacters() {
+    const filteredCharacters = characters.filter(
+      character => {
+      const name = character.name.toLowerCase()
+      const filterText = characterFilter.toLowerCase()
+      return name.includes(filterText)
+        && (charactersType === '' || character.type === charactersType)
+    })
+    return filteredCharacters
+  }
+
+  function getCharacterType(e) {
+    const charactersType = e.target.value
+    setCharactersType(charactersType)
+  }
+  function resetHandler(){
+    setCharactersType('')
+    setCharacterFilter('')
+  }
+
 
   if (characters.length < 1) {
     return <div className="section">
@@ -31,9 +59,14 @@ const CharacterList = () => {
 
   return <div className="section">
     <div className="container">
-
+    
+      <button value="God" onClick={getCharacterType} className='button'>God</button>
+      <button value="Titan" onClick={getCharacterType} className='button'>Titan</button>
+      <button value="Hero" onClick={getCharacterType} className='button'>Hero</button>
+      <button onClick={resetHandler} className='button'>Reset</button>
+      <input className='input' placeholder='Search your character here' onChange={handleInput}></input>
       <div className="columns is-multiline is-mobile">
-        {characters.map((character) => {
+        {filterCharacters().map((character)=> {
           return <div
             className="column is-one-third-desktop is-half-tablet is-half-mobile"
             key={character.name}
@@ -54,15 +87,13 @@ const CharacterList = () => {
                 </div>
                 <div className="card-image">
                   <figure className="image is-4by3">
-                    <img src={character.images.regular} alt={character.name} />
+                    <img src={character.images} alt={character.name} />
                   </figure>
                 </div>
               </div>
             </Link>
           </div>
         })}
-
-
       </div>
 
     </div>

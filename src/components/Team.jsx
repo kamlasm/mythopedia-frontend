@@ -62,10 +62,15 @@ const Team = () => {
             const newIntelligence = intelligence + character.intelligence
             setIntelligence(newIntelligence)
             const newLevel = level
-            const token = localStorage.getItem('token')
-            await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
+            try {
+                const token = localStorage.getItem('token')
+                await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            } catch (err) {
+                const error = err.response.data.message
+                setError(error)
+            }
         }
     }
 
@@ -81,10 +86,15 @@ const Team = () => {
         const newIntelligence = intelligence - character.intelligence
         setIntelligence(newIntelligence)
         const newLevel = level
-        const token = localStorage.getItem('token')
-        await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
-            headers: { Authorization: `Bearer ${token}` }
-        })
+        try {
+            const token = localStorage.getItem('token')
+            await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        } catch (err) {
+            const error = err.response.data.message
+            setError(error)
+        }
     }
 
 
@@ -118,7 +128,7 @@ const Team = () => {
                                     <div className="media-content">
                                         <p>{character.name}</p>
                                         {/* <figure className="image is-128x128">
-                           <img src={character.images.regular} alt={character.name}/>
+                           <img src={character.images} alt={character.name}/>
                        </figure> */}
 
                                         <p>Cost: {character.cost}</p>
@@ -147,7 +157,7 @@ const Team = () => {
                                     <div className="media-content">
                                         <h2 className="title is-4">{character.name}</h2>
                                         {/* <figure className="image is-128x128">
-                        <img src={character.images.regular} alt={character.name}/>
+                        <img src={character.images} alt={character.name}/>
                     </figure> */}
 
                                         <p>Cost: {character.cost}</p>
