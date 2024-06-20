@@ -37,13 +37,15 @@ const Character = () => {
   function ShowParents(name, relation) {
     if (!name|| name==="") return null
     return (
-      <div className='column'>
+      <div className='column '>
+        <div className="box">
         <p>{relation}:</p>
         {relativeExists(name) ? (
           <Link to={`/characters/${name}`}>{name}</Link>
         ) : (
           <p>{name}</p>
         )}
+      </div>
       </div>
     )
   }
@@ -52,6 +54,7 @@ const Character = () => {
     if (!relatives || relatives.length === 0) return null
     return (
       <div className='column'>
+        <div className="box">
         <p>{relation}:</p>
         <ul>
           {relatives.map((relative, index) => (
@@ -64,6 +67,7 @@ const Character = () => {
             </li>
           ))}
         </ul>
+      </div>
       </div>
     )
   }

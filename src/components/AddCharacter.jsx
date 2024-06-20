@@ -20,7 +20,7 @@ export default function AddCharacter() {
     })
 
     const [error, setError] = useState('')
-    console.log(formData)
+    
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
