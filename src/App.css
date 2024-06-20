@@ -12,3 +12,7 @@ img {
 .team-page{
     margin-bottom: 20px;
 }
+
+.Toastify__progress-bar-theme--dark {
+    --toastify-color-progress-dark: hsl(348, 100%, 61%);
+}

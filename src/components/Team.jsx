@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Team = () => {
 
@@ -50,7 +52,7 @@ const Team = () => {
 
     async function handleAdd(character) {
         if (character.cost > money) {
-            setError('not enough money')
+            toast("Not enough money!")
         } else {
             const newTeam = structuredClone(team)
             newTeam.push(character)
@@ -97,6 +99,18 @@ const Team = () => {
         }
     }
 
+    function hideOptions() {
+        if (team.length === 0) {
+            return characters
+        } else {
+            const filteredCharacters = characters.filter(character => {
+                return (team.every(teamCharacter => {
+                    return teamCharacter.name !== character.name
+                }))           
+            })
+            return filteredCharacters
+       }
+    }
 
     if (level < 1) {
         return <div className="section">
@@ -110,6 +124,11 @@ const Team = () => {
 
     return <div className="section">
         <p>{error}</p>
+        < ToastContainer
+        position="top-center"
+        theme="dark" 
+        autoClose={2000}
+        />
         <div className="container team-page">
             <h1 className="title">Your Team</h1>
             <h2 className="subtitle">Build your team to battle against the monsters. When you've chosen your team, click on 'Ready to Play'.</h2>
@@ -154,7 +173,7 @@ const Team = () => {
         <div className="container team-page">
             <h2 className="title">Choose from these characters</h2>
             <div className="columns is-multiline is-mobile">
-                {characters.map((character) => {
+                {hideOptions().map((character) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
                         key={character._id}>
                         <div className="card">
