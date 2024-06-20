@@ -56,7 +56,7 @@ export default function EditMonster() {
             await axios.put(`/api/monsters/${monsterName}`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            navigate(`/monsters/${monsterName}`)
+            navigate(`/monsters/${formData.name}`)
         } catch (err) {
             const error = err.response.data.message
             setError(error)
@@ -100,7 +100,7 @@ export default function EditMonster() {
                         <input
                             className="input is-hovered"
                             type="text"
-                            name={'images'}
+                            name={'image'}
                             onChange={handleChange}
                             value={formData.image}
                         />

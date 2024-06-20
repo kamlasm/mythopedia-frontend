@@ -87,7 +87,7 @@ export default function AddMonster() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'strength'}
                             onChange={handleChange}
                             value={formData.strength}
@@ -99,7 +99,7 @@ export default function AddMonster() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'intelligence'}
                             onChange={handleChange}
                             value={formData.intelligence}
@@ -111,7 +111,7 @@ export default function AddMonster() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'level'}
                             onChange={handleChange}
                             value={formData.level}
