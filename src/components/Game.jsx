@@ -162,80 +162,82 @@ const Team = () => {
     return <div className="section">
         <p>{error}</p>
         <h1 className="title is-size-1 has-text-centered">Let the battle begin!</h1>
-        <div className="fixed-grid has-3-cols has-1-cols-mobile">
-            <div className="grid">
-                <div className="cell">
-                    <div className="container team-page">
-                        <h1 className="title">Your Team</h1>
-                        <h3>Money: {money}</h3>
-                        <h3>Team Strength: {strength}</h3>
-                        <h3>Team Intelligence: {intelligence}</h3>
+        <div className="container is-widescreen">
+            <div className="fixed-grid has-3-cols has-1-cols-mobile">
+                <div className="grid">
+                    <div className="cell">
+                        <div className="container team-page">
+                            <h1 className="title">Your Team</h1>
+                            <h3>Money: {money}</h3>
+                            <h3>Team Strength: {strength}</h3>
+                            <h3>Team Intelligence: {intelligence}</h3>
 
-                        {isHidden && <div>
-                            <div className="buttons">
-                                <button className="button is-primary" onClick={startBattle}>Play</button>
-                                <Link to='/your-team'><button className="button is-warning">Rebuild Team</button></Link>
-                            </div>
-                        </div>}
-                        {isHidden ? ""
-                            : winner && level === 6 ? <div>
-                                <h3 className="title is-4 mt-4 has-background-success-light has-text-success">Congratulations, you win the game! Reset and play again.</h3>
-                                <button className="button is-primary " onClick={handleReset}>Reset</button>
-                            </div>
-                                : winner ? <div>
-                                    <h3 className="title is-4 mt-4 has-background-success-light has-text-success">Congratulations, your team is the best! Try the next level.</h3>
-                                    <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
+                            {isHidden && <div>
+                                <div className="buttons">
+                                    <button className="button is-primary" onClick={startBattle}>Play</button>
+                                    <Link to='/your-team'><button className="button is-warning">Rebuild Team</button></Link>
                                 </div>
-                                    : <div>
-                                        <h3 className="title is-4 mt-4 has-background-danger-light has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</h3>
-                                        <Link className="button is-danger" to="/your-team">Try again</Link>
-                                    </div>}
-                    </div>
+                            </div>}
+                        </div>
 
-                    <div className="container team-page">
-                        <h2 className="title is-4">Team Members</h2>
-                        <div className="columns is-multiline is-mobile">
-                            {team.map((character) => {
-                                return <div className="column is-four-fifths-desktop is-two-thirds-tablet is-two-thirds-mobile"
-                                    key={character.name}>
-                                    <div className="card">
-                                        <div className="card-content">
-                                            <div className="media">
-                                                <div className="media-content">
-                                                    <h2 className="title is-5">{character.name}</h2>
-                                                    <figure className="image is-128x128">
-                                                        <img src={character.images} alt={character.name} className="image is-128x128" />
-                                                    </figure>
-                                                    <p>Cost: {character.cost}</p>
-                                                    <p>Strength: {character.strength}</p>
-                                                    <p>Intelligence: {character.intelligence}</p>
+                        <div className="container team-page">
+                            <h2 className="title is-4">Team Members</h2>
+                            <div className="columns is-multiline is-mobile">
+                                {team.map((character) => {
+                                    return <div className="column is-four-fifths-desktop is-two-thirds-tablet is-two-thirds-mobile"
+                                        key={character.name}>
+                                        <div className="card">
+                                            <div className="card-content">
+                                                <div className="media">
+                                                    <div className="media-content">
+                                                        <h2 className="title is-5">{character.name}</h2>
+                                                        <figure className="image is-128x128">
+                                                            <img src={character.images} alt={character.name} className="image is-128x128" />
+                                                        </figure>
+                                                        <p>Cost: {character.cost}</p>
+                                                        <p>Strength: {character.strength}</p>
+                                                        <p>Intelligence: {character.intelligence}</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            })}
+                                })}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="cell">
-                    <h1 className="title">Versus</h1>
-                </div>
-                <div className="cell">
-                    <div className="container team-page">
-                        <h1 className="title">Monster - Level {monster.level}</h1>
-                        <div className="columns is-multiline is-mobile">
-                            <div className="column is-four-fifths-desktop is-two-thirds-tablet is-two-thirds-mobile">
-                                <div className="card">
-                                    <div className="card-content">
-                                        <div className="media">
-                                            <div className="media-content">
-                                                <h2 className="title is-5">{monster.name}</h2>
-                                                <figure className="image is-128x128">
-                                                    <img src={monster.image} alt={monster.name} />
-                                                </figure>
-                                                <p>Strength: {isHidden || !winner ? "???" : monster.strength}</p>
-                                                <p>Intelligence: {isHidden || !winner ? "???" : monster.intelligence}</p>
+                    <div className="cell">
+                        <h1 className="title">Versus</h1>
+                        {isHidden ? ""
+                            : winner && level === 6 ? <div class="box has-background-success-light">
+                                <h3 className="title is-4 mt-4 has-text-success">Congratulations, you win the game! Reset and play again.</h3>
+                                <button className="button is-primary " onClick={handleReset}>Reset</button>
+                            </div>
+                                : winner ? <div class="box has-background-success-light ">
+                                    <h3 className="title is-4 mt-4 has-text-success">Congratulations, your team is the best! Try the next level.</h3>
+                                    <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
+                                </div>
+                                    : <div class="box has-background-danger-light">
+                                        <h3 className="title is-4 mt-4 has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</h3>
+                                        <Link className="button is-danger" to="/your-team">Try again</Link>
+                                    </div>}
+                    </div>
+                    <div className="cell">
+                        <div className="container team-page">
+                            <h1 className="title">Monster - Level {monster.level}</h1>
+                            <div className="columns is-multiline is-mobile">
+                                <div className="column is-four-fifths-desktop is-two-thirds-tablet is-two-thirds-mobile">
+                                    <div className="card">
+                                        <div className="card-content">
+                                            <div className="media">
+                                                <div className="media-content">
+                                                    <h2 className="title is-5">{monster.name}</h2>
+                                                    <figure className="image is-128x128">
+                                                        <img src={monster.image} alt={monster.name} />
+                                                    </figure>
+                                                    <p>Strength: {isHidden || !winner ? "???" : monster.strength}</p>
+                                                    <p>Intelligence: {isHidden || !winner ? "???" : monster.intelligence}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

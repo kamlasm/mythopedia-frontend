@@ -108,9 +108,11 @@ const Character = () => {
           {ShowOtherRelatives(character.relatives.children, 'Children')}
           {ShowOtherRelatives(character.relatives.siblings, 'Siblings')}
         </div>
+        <div class="box">
         <figure className="image is-center">
           <img src={character.images} alt={character.name} />
         </figure>
+        </div>
         <div className='buttons'>
           {isAdmin() && (
             <>

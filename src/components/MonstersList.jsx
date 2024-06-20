@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { isAdmin } from '../lib/auth'
 
 const MonsterList = () => {
     const [monsters, setMonsters] = useState([])
@@ -12,7 +13,10 @@ const MonsterList = () => {
 
     async function fetchMonsters() {
         try {
-            const resp = await axios.get('/api/monsters')
+            const token = localStorage.getItem('token')
+            const resp = await axios.get('/api/monsters', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
             setMonsters(resp.data)
         } catch (err) {
             const error = err.response.data.message
@@ -100,31 +104,32 @@ const MonsterList = () => {
             <button className='button' onClick={() => handleOrder('name')}>Sort by Name{getSortIndicator('name')}</button>
             <button className='button' onClick={() => handleOrder('level')}>Sort by Level{getSortIndicator('level')}</button>
             <button className='button' onClick={resetHandler}>Reset</button>
+            {isAdmin() &&<Link to="/monsters/newMonster" className="button is-primary">Add Monsters</Link>}
             </div>
             <div className="container">
                 <div className="columns is-multiline is-mobile">
-                    {sortMonsters().map((monsters) => {
+                    {sortMonsters().map((monster) => {
                         return <div
                             className="column is-one-third-desktop is-half-tablet is-half-mobile"
-                            key={monsters.name}
+                            key={monster.name}
                         >
-                            <Link to={`/monsters/${monsters.name}`}>
+                            <Link to={`/monsters/${monster.name}`}>
                                 <div className="card">
                                     <div className="card-content">
                                         <div className="media">
                                             <div className="media-content">
                                                 <h2 className="title is-4">
-                                                    {monsters.name}
+                                                    {monster.name}
                                                 </h2>
                                                 <p className="subtitle is-4">
-                                                    Level: {monsters.level}
+                                                    Level: {monster.level}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="card-image">
                                         <figure className="image is-4by3">
-                                            <img src={monsters.image} alt={monsters.name} />
+                                            <img src={monster.image} alt={monster.name} />
                                         </figure>
                                     </div>
                                 </div>

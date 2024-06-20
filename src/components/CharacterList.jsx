@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { isAdmin } from '../lib/auth'
 
 const CharacterList = () => {
   const [characters, setCharacters] = useState([])
@@ -64,6 +65,7 @@ const CharacterList = () => {
       <button value="Titan" onClick={getCharacterType} className='button'>Titan</button>
       <button value="Hero" onClick={getCharacterType} className='button'>Hero</button>
       <button onClick={resetHandler} className='button'>Reset</button>
+      {isAdmin() &&<Link to="/characters/newCharacter" className="button is-primary">Add Character</Link>}
       </div>
       <div className="field">
       <input className='input' placeholder='Search your character here' onChange={handleInput}></input>
