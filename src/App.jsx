@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 import Home from './components/Home'
 import CharacterList from './components/CharacterList'
+import MonstersList from './components/MonstersList'
 import Navbar from './components/Navbar'
 import ShowCharacter from './components/ShowCharacter'
 import Signup from './components/Signup'
@@ -18,6 +19,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/characters" element={<CharacterList />} />
+      <Route path="/monsters" element={<MonstersList />} />
       <Route path="/characters/:characterName" element={<ShowCharacter />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
