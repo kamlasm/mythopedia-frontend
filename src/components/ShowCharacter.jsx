@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getPayload, isAdmin } from '../lib/auth'
 
+export default function Character() {
 
-const Character = () => {
   const navigate = useNavigate()
 
   const { characterName } = useParams()
@@ -16,7 +16,7 @@ const Character = () => {
   useEffect(() => {
     async function fetchCharacter() {
       try {
-        const characterResp  = await axios.get(`/api/characters/${characterName}`)
+        const characterResp = await axios.get(`/api/characters/${characterName}`)
         getPayload()
         setCharacter(characterResp.data)
         const allCharactersResp = await axios.get('/api/characters')
@@ -30,22 +30,22 @@ const Character = () => {
     fetchCharacter()
   }, [characterName])
 
-  function relativeExists(name){
+  function relativeExists(name) {
     return allCharacters.some(character => character.name === name)
   }
 
   function ShowParents(name, relation) {
-    if (!name|| name==="") return null
+    if (!name || name === "") return null
     return (
       <div className='column '>
         <div className="box">
-        <p>{relation}:</p>
-        {relativeExists(name) ? (
-          <Link to={`/characters/${name}`}>{name}</Link>
-        ) : (
-          <p>{name}</p>
-        )}
-      </div>
+          <p>{relation}:</p>
+          {relativeExists(name) ? (
+            <Link to={`/characters/${name}`}>{name}</Link>
+          ) : (
+            <p>{name}</p>
+          )}
+        </div>
       </div>
     )
   }
@@ -55,23 +55,22 @@ const Character = () => {
     return (
       <div className='column'>
         <div className="box">
-        <p>{relation}:</p>
-        <ul>
-          {relatives.map((relative, index) => (
-            <li key={index}>
-              {relativeExists(relative) ? (
-                <Link to={`/characters/${relative}`}>{relative}</Link>
-              ) : (
-                <p>{relative}</p>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+          <p>{relation}:</p>
+          <ul>
+            {relatives.map((relative, index) => (
+              <li key={index}>
+                {relativeExists(relative) ? (
+                  <Link to={`/characters/${relative}`}>{relative}</Link>
+                ) : (
+                  <p>{relative}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     )
   }
-
 
   async function handleDelete() {
     try {
@@ -113,9 +112,9 @@ const Character = () => {
           {ShowOtherRelatives(character.relatives.siblings, 'Siblings')}
         </div>
         <div className="box">
-        <figure className="image is-center">
-          <img src={character.images} alt={character.name} />
-        </figure>
+          <figure className="image is-center">
+            <img src={character.images} alt={character.name} />
+          </figure>
         </div>
         <div className='buttons'>
           {isAdmin() && (
@@ -139,6 +138,3 @@ const Character = () => {
     </div>
   )
 }
-
-
-export default Character

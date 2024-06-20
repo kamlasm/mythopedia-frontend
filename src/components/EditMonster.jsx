@@ -1,7 +1,6 @@
-import axios from "axios"
-import { useNavigate, useParams, Link } from "react-router-dom"
+import axios from 'axios'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-
 
 export default function EditMonster() {
 
@@ -14,7 +13,7 @@ export default function EditMonster() {
         image: '',
         strength: '',
         intelligence: '',
-        level:'',
+        level: '',
     })
     const [error, setError] = useState('')
 
@@ -22,10 +21,10 @@ export default function EditMonster() {
         async function fetchMonster() {
             try {
                 const token = localStorage.getItem('token')
-                const resp = await fetch(`/api/monsters/${monsterName}`,{
+                const resp = await axios.get(`/api/monsters/${monsterName}`, {
                     headers: { Authorization: `Bearer ${token}` }
-                  })
-                const data = await resp.json()
+                })
+                const data = resp.data
                 setFormData({
                     name: `${data.name}`,
                     description: `${data.description}`,
@@ -36,9 +35,8 @@ export default function EditMonster() {
                 })
             } catch (err) {
                 const error = err.response.data.message
-                setError(error)  
+                setError(error)
             }
-
         }
         fetchMonster()
     }, [monsterName])
@@ -62,7 +60,6 @@ export default function EditMonster() {
             setError(error)
         }
     }
-    
 
     return <div className="section">
         <p>{error}</p>
@@ -82,6 +79,7 @@ export default function EditMonster() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Description</label>
                     <div className="control">
@@ -94,6 +92,7 @@ export default function EditMonster() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Image</label>
                     <div className="control">
@@ -106,7 +105,7 @@ export default function EditMonster() {
                         />
                     </div>
                 </div>
-                
+
                 <div className="field">
                     <label className="label">Strength</label>
                     <div className="control">
@@ -145,6 +144,7 @@ export default function EditMonster() {
                         />
                     </div>
                 </div>
+
                 <button className="button is-primary">Submit</button>
             </form>
             <Link to={`/monsters/${monsterName}`} className='button is-warning' >Back to {formData.name}</Link>

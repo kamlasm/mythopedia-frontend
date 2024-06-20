@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { isAdmin } from '../lib/auth'
 
-const CharacterList = () => {
+export default function CharacterList() {
+
   const [characters, setCharacters] = useState([])
   const [error, setError] = useState('')
   const [characterFilter, setCharacterFilter] = useState('')
   const [charactersType, setCharactersType] = useState("")
   const [orderBy, setOrderBy] = useState('name')
   const [order, setOrder] = useState('asc')
-
 
   async function fetchCharacters() {
     try {
@@ -74,13 +74,13 @@ const CharacterList = () => {
     const charactersType = e.target.value
     setCharactersType(charactersType)
   }
+
   function resetHandler() {
     setCharactersType('')
     setCharacterFilter('')
     setOrderBy('name')
     setOrder('asc')
   }
-
 
   if (characters.length < 1) {
     return <div className="section">
@@ -94,6 +94,7 @@ const CharacterList = () => {
 
   return <div className="section">
     <div className="container">
+
       <div className='buttons'>
         <button value="God" onClick={getCharacterType} className='button'>God</button>
         <button value="Titan" onClick={getCharacterType} className='button'>Titan</button>
@@ -102,9 +103,11 @@ const CharacterList = () => {
         <button onClick={resetHandler} className='button'>Reset</button>
         {isAdmin() && <Link to="/characters/newCharacter" className="button is-primary">Add Character</Link>}
       </div>
+
       <div className="field">
-      <input className='input' placeholder='Search your character here' onChange={handleInput} value={characterFilter}></input>
+        <input className='input' placeholder='Search your character here' onChange={handleInput} value={characterFilter}></input>
       </div>
+
       <div className="container">
         <div className="columns is-multiline is-mobile">
           {sortCharacters().map((character) => {
@@ -137,8 +140,7 @@ const CharacterList = () => {
           })}
         </div>
       </div>
+
     </div>
   </div>
 }
-
-export default CharacterList

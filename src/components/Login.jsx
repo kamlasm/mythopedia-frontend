@@ -2,8 +2,8 @@ import { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-
 export default function Login() {
+
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
@@ -24,16 +24,13 @@ export default function Login() {
         try {
             const { data } = await axios.post('/api/login', formData);
             const token = data.token;
-
             localStorage.setItem('token', token);
-            
+        
             navigate('/your-team')
-
         } catch (err) {
             setError(err.response.data.message)
         }
     }
-
 
     return <div className="section">
         <p>{error}</p>
@@ -68,6 +65,7 @@ export default function Login() {
                         />
                     </div>
                 </div>
+                
                 <button className="button is-primary">Submit</button>
     
             </form>

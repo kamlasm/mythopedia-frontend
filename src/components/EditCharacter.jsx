@@ -1,7 +1,7 @@
-import axios from "axios"
-import { useNavigate, useParams, Link } from "react-router-dom"
+import axios from 'axios'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { isAdmin } from "../lib/auth"
+import { isAdmin } from '../lib/auth'
 
 export default function EditCharacter() {
 
@@ -24,8 +24,8 @@ export default function EditCharacter() {
     useEffect(() => {
         async function fetchCharacter() {
             try {
-                const resp = await fetch(`/api/characters/${characterName}`)
-                const data = await resp.json()
+                const resp = await axios.get(`/api/characters/${characterName}`)
+                const data = resp.data
                 setFormData({
                     name: `${data.name}`,
                     description: `${data.description}`,
@@ -41,7 +41,6 @@ export default function EditCharacter() {
                 const error = err.response.data.message
                 setError(error)
             }
-
         }
         fetchCharacter()
     }, [characterName])
@@ -104,6 +103,7 @@ export default function EditCharacter() {
             </div>
         </div>
     }
+
     return <div className="section">
         <p>{error}</p>
         <div className="container">
@@ -122,6 +122,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Description</label>
                     <div className="control">
@@ -134,6 +135,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Type</label>
                     <div className="control">
@@ -146,6 +148,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Images</label>
                     <div className="control">
@@ -249,6 +252,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Intelligence</label>
                     <div className="control">
@@ -261,6 +265,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Cost</label>
                     <div className="control">
@@ -273,6 +278,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Is playable</label>
                     <div className="control">
@@ -285,6 +291,7 @@ export default function EditCharacter() {
                         />
                     </div>
                 </div>
+
                 <button className="button is-primary">Submit</button>
             </form>
             <Link to={`/characters/${characterName}`} className='button is-warning' >Back to {formData.name}</Link>

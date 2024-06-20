@@ -1,6 +1,6 @@
-import axios from "axios"
-import { useNavigate, useParams, Link } from "react-router-dom"
-import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 
 export default function AddMonster() {
 
@@ -12,11 +12,11 @@ export default function AddMonster() {
         image: '',
         strength: '',
         intelligence: '',
-        level:'',
+        level: '',
     })
 
     const [error, setError] = useState('')
-    
+
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
@@ -30,7 +30,6 @@ export default function AddMonster() {
             await axios.post('/api/monsters', formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-
             navigate('/monsters')
         } catch (err) {
             const error = err.response.data.message
@@ -56,6 +55,7 @@ export default function AddMonster() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Description</label>
                     <div className="control">
@@ -68,7 +68,7 @@ export default function AddMonster() {
                         />
                     </div>
                 </div>
-              
+
                 <div className="field">
                     <label className="label">Image</label>
                     <div className="control">
@@ -94,6 +94,7 @@ export default function AddMonster() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Intelligence</label>
                     <div className="control">
@@ -106,6 +107,7 @@ export default function AddMonster() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Level</label>
                     <div className="control">
@@ -118,6 +120,7 @@ export default function AddMonster() {
                         />
                     </div>
                 </div>
+                
                 <button className="button is-primary">Submit</button>
             </form>
         </div>

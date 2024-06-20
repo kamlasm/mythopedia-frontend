@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { isAdmin } from '../lib/auth'
 
 export default function AddCharacter() {
@@ -12,7 +12,7 @@ export default function AddCharacter() {
         description: '',
         type: '',
         images: '',
-        relatives: {father: '', mother: '', spouses: [], lovers: [], children: [], siblings: []},
+        relatives: { father: '', mother: '', spouses: [], lovers: [], children: [], siblings: [] },
         strength: 0,
         intelligence: 0,
         cost: 0,
@@ -45,7 +45,7 @@ export default function AddCharacter() {
         if (e.target.checked) {
             newFormData[e.target.name] = true
         } else {
-            newFormData[e.target.name] = false  
+            newFormData[e.target.name] = false
         }
         setFormData(newFormData)
     }
@@ -66,13 +66,14 @@ export default function AddCharacter() {
 
     if (!isAdmin()) {
         return <div className="section">
-      <div className="container">
-        <div className="title">
-          You are not authorised!      
+            <div className="container">
+                <div className="title">
+                    You are not authorised!
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  }
+    }
+
     return <div className="section">
         <p>{error}</p>
         <div className="container">
@@ -91,6 +92,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Description</label>
                     <div className="control">
@@ -103,6 +105,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Type</label>
                     <div className="control">
@@ -115,6 +118,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Images</label>
                     <div className="control">
@@ -218,6 +222,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Intelligence</label>
                     <div className="control">
@@ -230,6 +235,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Cost</label>
                     <div className="control">
@@ -242,6 +248,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Is playable</label>
                     <div className="control">
@@ -254,6 +261,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
+                
                 <button className="button is-primary">Submit</button>
             </form>
         </div>

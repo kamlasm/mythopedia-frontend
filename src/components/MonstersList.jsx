@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { isAdmin } from '../lib/auth'
 
-const MonsterList = () => {
+export default function MonsterList() {
+
     const [monsters, setMonsters] = useState([])
     const [error, setError] = useState('')
     const [monsterFilter, setMonsterFilter] = useState('')
     const [orderBy, setOrderBy] = useState('name')
     const [order, setOrder] = useState('asc')
-
 
     async function fetchMonsters() {
         try {
@@ -33,10 +33,10 @@ const MonsterList = () => {
 
     function filterMonsters() {
         const filteredMonsters = monsters.filter(monsters => {
-                const name = monsters.name.toLowerCase()
-                const filterText = monsterFilter.toLowerCase()
-                return name.includes(filterText)
-            })
+            const name = monsters.name.toLowerCase()
+            const filterText = monsterFilter.toLowerCase()
+            return name.includes(filterText)
+        })
         return filteredMonsters
     }
 
@@ -60,10 +60,11 @@ const MonsterList = () => {
         })
         return sortedMonsters
     }
-    function handleOrder(orderByField){
+
+    function handleOrder(orderByField) {
         if (orderBy === orderByField) {
-            setOrder(order === 'asc'? 'desc':'asc')
-        } else{
+            setOrder(order === 'asc' ? 'desc' : 'asc')
+        } else {
             setOrderBy(orderByField)
             setOrder('asc')
         }
@@ -75,15 +76,12 @@ const MonsterList = () => {
         }
         return '';
     }
-    function resetHandler(){
-        
+    function resetHandler() {
         setError('')
         setMonsterFilter('')
         setOrderBy('name')
         setOrder('asc')
-        
-      }
-
+    }
 
     if (monsters.length < 1) {
         return <div className="section">
@@ -97,15 +95,18 @@ const MonsterList = () => {
 
     return <div className="section">
         <div className="container">
+
             <div className="field">
                 <input className='input' placeholder='Search your monsters here' onChange={handleInput}></input>
             </div>
+
             <div className='buttons'>
-            <button className='button' onClick={() => handleOrder('name')}>Sort by Name{getSortIndicator('name')}</button>
-            <button className='button' onClick={() => handleOrder('level')}>Sort by Level{getSortIndicator('level')}</button>
-            <button className='button' onClick={resetHandler}>Reset</button>
-            {isAdmin() &&<Link to="/monsters/newMonster" className="button is-primary">Add Monsters</Link>}
+                <button className='button' onClick={() => handleOrder('name')}>Sort by Name{getSortIndicator('name')}</button>
+                <button className='button' onClick={() => handleOrder('level')}>Sort by Level{getSortIndicator('level')}</button>
+                <button className='button' onClick={resetHandler}>Reset</button>
+                {isAdmin() && <Link to="/monsters/newMonster" className="button is-primary">Add Monsters</Link>}
             </div>
+
             <div className="container">
                 <div className="columns is-multiline is-mobile">
                     {sortMonsters().map((monster) => {
@@ -138,8 +139,7 @@ const MonsterList = () => {
                     })}
                 </div>
             </div>
+            
         </div>
     </div>
 }
-
-export default MonsterList

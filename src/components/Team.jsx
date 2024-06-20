@@ -4,14 +4,13 @@ import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Team = () => {
+export default function Team() {
 
     const [team, setTeam] = useState([])
     const [money, setMoney] = useState(0)
     const [strength, setStrength] = useState(0)
     const [intelligence, setIntelligence] = useState(0)
     const [level, setLevel] = useState(0)
-
     const [characters, setCharacters] = useState([])
 
     const [error, setError] = useState('')
@@ -77,7 +76,6 @@ const Team = () => {
     }
 
     async function handleRemove(character, index) {
-
         const newTeam = structuredClone(team)
         newTeam.splice(index, 1)
         setTeam(newTeam)
@@ -129,6 +127,7 @@ const Team = () => {
             theme="dark"
             autoClose={2000}
         />
+
         <div className="container team-page">
             <h1 className="title">Your Team</h1>
             <h2 className="subtitle">Build your team to battle against the monsters. When you've chosen your team, click on 'Ready to Play'.</h2>
@@ -197,8 +196,6 @@ const Team = () => {
                 })}
             </div>
         </div>
+        
     </div>
-
 }
-
-export default Team

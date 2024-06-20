@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
-import axios from "axios"
-import { Link, useNavigate } from "react-router-dom"
-import Swal from "sweetalert2"
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const Team = () => {
+export default function Team() {
+
     const navigate = useNavigate()
     const MySwal = withReactContent(Swal)
 
@@ -23,9 +24,10 @@ const Team = () => {
     async function fetchUser() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await fetch('/api/your-team', { headers: { Authorization: `Bearer ${token}` } })
-            const data = await resp.json()
-            const gameplay = data.gameplay
+            const resp = await axios.get('/api/your-team', {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+            const gameplay = resp.data.gameplay
             setTeam(gameplay.team)
             setMoney(gameplay.money)
             setStrength(gameplay.totalStrength)
@@ -40,8 +42,8 @@ const Team = () => {
     async function fetchMonster() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await fetch('/api/monster', { headers: { Authorization: `Bearer ${token}` } })
-            const data = await resp.json()
+            const resp = await axios.get('/api/monster', { headers: { Authorization: `Bearer ${token}` } })
+            const data = resp.data
             setMonster(data)
             setIsHidden(true)
         } catch (err) {
@@ -116,7 +118,6 @@ const Team = () => {
     }
 
     function startBattle() {
-
         let timerInterval;
         MySwal.fire({
             title: "<strong>Battle in progress!<strong>",
@@ -136,13 +137,11 @@ const Team = () => {
             },
             willClose: () => {
                 clearInterval(timerInterval);
-
             }
         }).then(() => {
             playHandle()
         });
     }
-
 
     if (level < 1) {
         return <div className="section">
@@ -154,11 +153,27 @@ const Team = () => {
         </div>
     }
 
-
-
     return <div className="section">
         <p>{error}</p>
         <h1 className="title is-size-1 has-text-centered">Let the battle begin!</h1>
+        <div className="columns is-centered has-text-centered team-page">
+            <div className="column is-two-thirds-desktop">
+                {isHidden ? ""
+                    : winner && level === 6 ? <div className="box has-background-success-light">
+                        <h3 className="title is-4 mt-4 has-text-success">Congratulations, you win the game! Reset and play again.</h3>
+                        <button className="button is-primary " onClick={handleReset}>Reset</button>
+                    </div>
+                        : winner ? <div className="box has-background-success-light ">
+                            <h3 className="title is-4 mt-4 has-text-success">Congratulations, your team is the best! Try the next level.</h3>
+                            <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
+                        </div>
+                            : <div className="box has-background-danger-light">
+                                <h3 className="title is-4 mt-4 has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</h3>
+                                <Link className="button is-danger" to="/your-team">Try again</Link>
+                            </div>}
+            </div>
+        </div>
+
         <div className="container is-widescreen">
             <div className="fixed-grid has-3-cols has-1-cols-mobile">
                 <div className="grid">
@@ -168,7 +183,6 @@ const Team = () => {
                             <h3>Money: {money}</h3>
                             <h3>Team Strength: {strength}</h3>
                             <h3>Team Intelligence: {intelligence}</h3>
-
                             {isHidden && <div>
                                 <div className="buttons">
                                     <button className="button is-primary" onClick={startBattle}>Play</button>
@@ -203,22 +217,11 @@ const Team = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className="cell">
                         <h1 className="title">Versus</h1>
-                        {isHidden ? ""
-                            : winner && level === 6 ? <div className="box has-background-success-light">
-                                <h3 className="title is-4 mt-4 has-text-success">Congratulations, you win the game! Reset and play again.</h3>
-                                <button className="button is-primary " onClick={handleReset}>Reset</button>
-                            </div>
-                                : winner ? <div className="box has-background-success-light ">
-                                    <h3 className="title is-4 mt-4 has-text-success">Congratulations, your team is the best! Try the next level.</h3>
-                                    <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
-                                </div>
-                                    : <div className="box has-background-danger-light">
-                                        <h3 className="title is-4 mt-4 has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</h3>
-                                        <Link className="button is-danger" to="/your-team">Try again</Link>
-                                    </div>}
                     </div>
+
                     <div className="cell">
                         <div className="container team-page">
                             <h1 className="title">Monster - Level {monster.level}</h1>
@@ -247,5 +250,3 @@ const Team = () => {
         </div>
     </div>
 }
-
-export default Team

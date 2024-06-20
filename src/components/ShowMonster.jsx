@@ -4,8 +4,8 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getPayload, isAdmin } from '../lib/auth'
 
+export default function Monster() {
 
-const Monster = () => {
   const navigate = useNavigate()
 
   const { monsterName } = useParams()
@@ -16,7 +16,7 @@ const Monster = () => {
     async function fetchMonster() {
       try {
         const token = localStorage.getItem('token')
-        const monsterResp  = await axios.get(`/api/monsters/${monsterName}`,{
+        const monsterResp = await axios.get(`/api/monsters/${monsterName}`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         getPayload()
@@ -29,7 +29,6 @@ const Monster = () => {
     }
     fetchMonster()
   }, [monsterName])
-
 
   async function handleDelete() {
     try {
@@ -62,9 +61,9 @@ const Monster = () => {
         <h2 className="subtitle is-3">Level: {monster.level}</h2>
         <h2 className="subtitle">{monster.description}</h2>
         <div className="box">
-        <figure className="image is-center">
-          <img src={monster.image} alt={monster.name} />
-        </figure>
+          <figure className="image is-center">
+            <img src={monster.image} alt={monster.name} />
+          </figure>
         </div>
         <div className='buttons'>
           {isAdmin() && (
@@ -88,6 +87,3 @@ const Monster = () => {
     </div>
   )
 }
-
-
-export default Monster

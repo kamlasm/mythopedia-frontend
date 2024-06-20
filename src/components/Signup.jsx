@@ -2,7 +2,6 @@ import React from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-
 export default function Signup() {
 
     const navigate = useNavigate()
@@ -37,7 +36,7 @@ export default function Signup() {
     return <div className="section">
         <p>{error}</p>
         <div className="container">
-       
+
             <h1 className="title">Sign Up</h1>
             <form onSubmit={handleSubmit} className="box">
                 <div className="field">
@@ -53,6 +52,7 @@ export default function Signup() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Email</label>
                     <div className="control">
@@ -66,6 +66,7 @@ export default function Signup() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Password</label>
                     <div className="control">
@@ -79,6 +80,7 @@ export default function Signup() {
                         />
                     </div>
                 </div>
+
                 <div className="field">
                     <label className="label">Confirm password</label>
                     <div className="control">
@@ -92,6 +94,7 @@ export default function Signup() {
                         />
                     </div>
                 </div>
+                
                 <button className="button is-primary">Submit</button>
             </form>
         </div>
