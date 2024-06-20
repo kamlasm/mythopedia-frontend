@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useNavigate, useParams, Link } from "react-router-dom"
 import { useEffect, useState } from 'react'
-
+import { isAdmin } from "../lib/auth"
 
 export default function EditCharacter() {
 
@@ -13,7 +13,7 @@ export default function EditCharacter() {
         description: '',
         type: '',
         images: '',
-        relatives: {father: '', mother: '', spouses: [], lovers: [], children: [], siblings: []},
+        relatives: { father: '', mother: '', spouses: [], lovers: [], children: [], siblings: [] },
         strength: '',
         intelligence: '',
         cost: '',
@@ -31,7 +31,7 @@ export default function EditCharacter() {
                     description: `${data.description}`,
                     type: `${data.type}`,
                     images: `${data.images}`,
-                    relatives: {father: `${data.relatives.father}`, mother: `${data.relatives.mother}`, spouses: `${data.relatives.spouses}`, lovers: `${data.relatives.lovers}`, children: `${data.relatives.children}`, siblings: `${data.relatives.siblings}`}, 
+                    relatives: { father: `${data.relatives.father}`, mother: `${data.relatives.mother}`, spouses: `${data.relatives.spouses}`, lovers: `${data.relatives.lovers}`, children: `${data.relatives.children}`, siblings: `${data.relatives.siblings}` },
                     strength: `${data.strength}`,
                     intelligence: `${data.intelligence}`,
                     cost: `${data.cost}`,
@@ -39,7 +39,7 @@ export default function EditCharacter() {
                 })
             } catch (err) {
                 const error = err.response.data.message
-                setError(error)  
+                setError(error)
             }
 
         }
@@ -70,16 +70,22 @@ export default function EditCharacter() {
         if (e.target.checked) {
             newFormData[e.target.name] = true
         } else {
-            newFormData[e.target.name] = false  
+            newFormData[e.target.name] = false
         }
         setFormData(newFormData)
     }
 
     async function handleSubmit(e) {
         e.preventDefault()
+        const newFormData = structuredClone(formData)
+        newFormData.relatives.spouses = newFormData.relatives.spouses.split(',')
+        newFormData.relatives.lovers = newFormData.relatives.lovers.split(',')
+        newFormData.relatives.children = newFormData.relatives.children.split(',')
+        newFormData.relatives.siblings = newFormData.relatives.siblings.split(',')
+        setFormData(newFormData)
         try {
             const token = localStorage.getItem('token')
-            await axios.put(`/api/characters/${characterName}`, formData, {
+            await axios.put(`/api/characters/${characterName}`, newFormData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             navigate(`/characters/${characterName}`)
@@ -88,8 +94,16 @@ export default function EditCharacter() {
             setError(error)
         }
     }
-    
 
+    if (!isAdmin()) {
+        return <div className="section">
+            <div className="container">
+                <div className="title">
+                    You are not authorised!
+                </div>
+            </div>
+        </div>
+    }
     return <div className="section">
         <p>{error}</p>
         <div className="container">
@@ -228,7 +242,7 @@ export default function EditCharacter() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'strength'}
                             onChange={handleChange}
                             value={formData.strength}
@@ -240,7 +254,7 @@ export default function EditCharacter() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'intelligence'}
                             onChange={handleChange}
                             value={formData.intelligence}
@@ -252,7 +266,7 @@ export default function EditCharacter() {
                     <div className="control">
                         <input
                             className="input is-hovered"
-                            type="text"
+                            type="number"
                             name={'cost'}
                             onChange={handleChange}
                             value={formData.cost}
@@ -267,6 +281,7 @@ export default function EditCharacter() {
                             name={'isPlayable'}
                             onChange={handleSelect}
                             value={formData.isPlayable}
+                            checked
                         />
                     </div>
                 </div>

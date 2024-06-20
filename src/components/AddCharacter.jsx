@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
-
+import { isAdmin } from '../lib/auth'
 
 export default function AddCharacter() {
 
@@ -13,14 +13,14 @@ export default function AddCharacter() {
         type: '',
         images: '',
         relatives: {father: '', mother: '', spouses: [], lovers: [], children: [], siblings: []},
-        strength: '',
-        intelligence: '',
-        cost: '',
+        strength: 0,
+        intelligence: 0,
+        cost: 0,
         isPlayable: false,
     })
 
     const [error, setError] = useState('')
-    console.log(formData)
+
     function handleChange(e) {
         const newFormData = structuredClone(formData)
         newFormData[e.target.name] = e.target.value
@@ -64,6 +64,15 @@ export default function AddCharacter() {
         }
     }
 
+    if (!isAdmin()) {
+        return <div className="section">
+      <div className="container">
+        <div className="title">
+          You are not authorised!      
+        </div>
+      </div>
+    </div>
+  }
     return <div className="section">
         <p>{error}</p>
         <div className="container">
@@ -202,7 +211,7 @@ export default function AddCharacter() {
                     <div className="control">
                         <input
                             className="input"
-                            type="text"
+                            type="number"
                             name={'strength'}
                             onChange={handleChange}
                             value={formData.strength}
@@ -214,7 +223,7 @@ export default function AddCharacter() {
                     <div className="control">
                         <input
                             className="input"
-                            type="text"
+                            type="number"
                             name={'intelligence'}
                             onChange={handleChange}
                             value={formData.intelligence}
@@ -226,7 +235,7 @@ export default function AddCharacter() {
                     <div className="control">
                         <input
                             className="input"
-                            type="text"
+                            type="number"
                             name={'cost'}
                             onChange={handleChange}
                             value={formData.cost}

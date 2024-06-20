@@ -16,3 +16,20 @@ img {
 .Toastify__progress-bar-theme--dark {
     --toastify-color-progress-dark: hsl(348, 100%, 61%);
 }
+
+.home {
+    background-image: url('https://www.grunge.com/img/gallery/the-untold-truth-of-the-temple-of-artemis/intro-1632322815.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.home-text-div {
+    background-color: rgba(225, 224, 189, 0.75);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.home-subtext {
+    font-weight: bold; 
+}

@@ -66,7 +66,7 @@ const CharacterList = () => {
       <button onClick={resetHandler} className='button'>Reset</button>
       </div>
       <div className="field">
-      <input className='input' placeholder='Search your character here' onChange={handleInput}></input>
+      <input className='input' placeholder='Search your character here' onChange={handleInput} value={characterFilter}></input>
       </div>
       <div className="container">
       <div className="columns is-multiline is-mobile">

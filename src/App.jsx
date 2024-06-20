@@ -27,6 +27,7 @@ function App() {
       <Route path="/characters/:characterName/editCharacter" element={< EditCharacter/>} />
       <Route path="/your-team" element={< Team/>} />
       <Route path="/game" element={< Game/>} />
+      <Route path="/*" element="Page doesn't exist"/>
     </Routes>
   </Router>
 }
