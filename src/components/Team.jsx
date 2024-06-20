@@ -106,10 +106,10 @@ const Team = () => {
             const filteredCharacters = characters.filter(character => {
                 return (team.every(teamCharacter => {
                     return teamCharacter.name !== character.name
-                }))           
+                }))
             })
             return filteredCharacters
-       }
+        }
     }
 
     if (level < 1) {
@@ -125,9 +125,9 @@ const Team = () => {
     return <div className="section">
         <p>{error}</p>
         < ToastContainer
-        position="top-center"
-        theme="dark" 
-        autoClose={2000}
+            position="top-center"
+            theme="dark"
+            autoClose={2000}
         />
         <div className="container team-page">
             <h1 className="title">Your Team</h1>
@@ -136,14 +136,13 @@ const Team = () => {
             <h3>Team Strength: {strength}</h3>
             <h3>Team Intelligence: {intelligence}</h3>
             <div className="buttons">
-                <Link to="/game" ><button className="button is-primary">Ready to Play</button></Link>
-            </div>
+                {team.length > 0 && <Link to="/game" ><button className="button is-primary">Ready to Play</button></Link>}            </div>
         </div>
 
         <div className="container team-page">
             <h2 className="title is-4">Team Members</h2>
             <p className="subtitle">{team.length === 0 && "Pick some team members!"}</p>
-            <div className="columns is-multiline is-mobile">               
+            <div className="columns is-multiline is-mobile">
                 {team.map((character, index) => {
                     return <div className="column is-one-third-desktop is-half-tablet is-half-mobile"
                         key={character.name}>

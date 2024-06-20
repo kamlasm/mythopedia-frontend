@@ -138,10 +138,7 @@ const Team = () => {
                 clearInterval(timerInterval);
 
             }
-        }).then((result) => {
-            if (result.dismiss === MySwal.DismissReason.timer) {
-                console.log("I was closed by the timer");
-            }
+        }).then(() => {
             playHandle()
         });
     }
@@ -209,15 +206,15 @@ const Team = () => {
                     <div className="cell">
                         <h1 className="title">Versus</h1>
                         {isHidden ? ""
-                            : winner && level === 6 ? <div class="box has-background-success-light">
+                            : winner && level === 6 ? <div className="box has-background-success-light">
                                 <h3 className="title is-4 mt-4 has-text-success">Congratulations, you win the game! Reset and play again.</h3>
                                 <button className="button is-primary " onClick={handleReset}>Reset</button>
                             </div>
-                                : winner ? <div class="box has-background-success-light ">
+                                : winner ? <div className="box has-background-success-light ">
                                     <h3 className="title is-4 mt-4 has-text-success">Congratulations, your team is the best! Try the next level.</h3>
                                     <button className="button is-primary " onClick={nextLevelHandle}>Next Level</button>
                                 </div>
-                                    : <div class="box has-background-danger-light">
+                                    : <div className="box has-background-danger-light">
                                         <h3 className="title is-4 mt-4 has-text-danger">Buuuuu, your team is the worst! Go back and rebuild your team.</h3>
                                         <Link className="button is-danger" to="/your-team">Try again</Link>
                                     </div>}

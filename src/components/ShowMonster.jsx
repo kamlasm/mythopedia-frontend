@@ -61,7 +61,7 @@ const Monster = () => {
         <h1 className="title is-1">{monster.name}</h1>
         <h2 className="subtitle is-3">Level: {monster.level}</h2>
         <h2 className="subtitle">{monster.description}</h2>
-        <div class="box">
+        <div className="box">
         <figure className="image is-center">
           <img src={monster.image} alt={monster.name} />
         </figure>

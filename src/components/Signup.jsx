@@ -39,7 +39,7 @@ export default function Signup() {
         <div className="container">
        
             <h1 className="title">Sign Up</h1>
-            <form onSubmit={handleSubmit} class="box">
+            <form onSubmit={handleSubmit} className="box">
                 <div className="field">
                     <label className="label">Username</label>
                     <div className="control">
