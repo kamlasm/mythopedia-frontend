@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { isAdmin } from '../lib/auth'
 import { useNavigate } from "react-router-dom"
 
 
@@ -33,7 +32,6 @@ const Navbar = () => {
             {!isLoggedIn &&<Link to="/signup" className="button is-primary">Sign Up</Link>}
             {!isLoggedIn &&<Link to="/login" className="button is-primary">Log In</Link>}
             {isLoggedIn &&<Link to="/your-team" className="button is-primary">Your Team</Link>}
-            {isAdmin() &&<Link to="/characters/newCharacter" className="button is-primary">Add Character</Link>}
             {isLoggedIn &&<button className="button" onClick={logout}>Logout</button>}
           </div>
         </div>

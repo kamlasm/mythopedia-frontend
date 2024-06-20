@@ -83,7 +83,7 @@ export default function AddCharacter() {
                     <label className="label">Name</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'name'}
                             onChange={handleChange}
@@ -95,7 +95,7 @@ export default function AddCharacter() {
                     <label className="label">Description</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'description'}
                             onChange={handleChange}
@@ -107,7 +107,7 @@ export default function AddCharacter() {
                     <label className="label">Type</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'type'}
                             onChange={handleChange}
@@ -119,7 +119,7 @@ export default function AddCharacter() {
                     <label className="label">Images</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'images'}
                             onChange={handleChange}
@@ -132,7 +132,7 @@ export default function AddCharacter() {
                     <label className="label">Father</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'father'}
                             onChange={handleRelatives}
@@ -145,7 +145,7 @@ export default function AddCharacter() {
                     <label className="label">Mother</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'mother'}
                             onChange={handleRelatives}
@@ -158,7 +158,7 @@ export default function AddCharacter() {
                     <label className="label">Spouses</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'spouses'}
                             onChange={handleRelativesArray}
@@ -171,7 +171,7 @@ export default function AddCharacter() {
                     <label className="label">Lovers</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'lovers'}
                             onChange={handleRelativesArray}
@@ -184,7 +184,7 @@ export default function AddCharacter() {
                     <label className="label">Children</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'children'}
                             onChange={handleRelativesArray}
@@ -197,7 +197,7 @@ export default function AddCharacter() {
                     <label className="label">Siblings</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="text"
                             name={'siblings'}
                             onChange={handleRelativesArray}
@@ -210,7 +210,7 @@ export default function AddCharacter() {
                     <label className="label">Strength</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="number"
                             name={'strength'}
                             onChange={handleChange}
@@ -222,7 +222,7 @@ export default function AddCharacter() {
                     <label className="label">Intelligence</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="number"
                             name={'intelligence'}
                             onChange={handleChange}
@@ -234,7 +234,7 @@ export default function AddCharacter() {
                     <label className="label">Cost</label>
                     <div className="control">
                         <input
-                            className="input"
+                            className="input is-hovered"
                             type="number"
                             name={'cost'}
                             onChange={handleChange}

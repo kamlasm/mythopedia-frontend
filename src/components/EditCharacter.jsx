@@ -88,7 +88,7 @@ export default function EditCharacter() {
             await axios.put(`/api/characters/${characterName}`, newFormData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
-            navigate(`/characters/${characterName}`)
+            navigate(`/characters/${formData.name}`)
         } catch (err) {
             const error = err.response.data.message
             setError(error)
