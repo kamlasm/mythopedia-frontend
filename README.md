@@ -122,6 +122,7 @@ Game page
 
 - Homepage image from [grunge.com](https://www.grunge.com/img/gallery/the-untold-truth-of-the-temple-of-artemis/intro-1632322815.jpg)
 - Character images from [greekmythology.com](https://www.greekmythology.com/) and [wikipedia](https://en.wikipedia.org/wiki/)
+- Characters data from [greek mythology data](https://github.com/kamiranoff/greek-mythology-data/blob/master/data/all.json)
 
 ## Future Improvements
 
