@@ -13,7 +13,7 @@ export default function Home() {
   return <div className="hero is-fullheight-with-navbar home">
     <div className="hero-body">
       <div className="container is-max-desktop has-text-centered home-text-div">
-        <h1 className="title is-1 has-text-dark">
+        <h1 className="title is-size-1 is-size-3-mobile has-text-dark">
           ⚡MYTHOPEDIA⚡
         </h1>
         
