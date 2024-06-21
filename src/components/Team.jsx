@@ -3,6 +3,7 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {baseUrl} from '../config'
 
 export default function Team() {
 
@@ -18,7 +19,7 @@ export default function Team() {
     async function fetchUser() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await axios.get('/api/your-team', { headers: { Authorization: `Bearer ${token}` } })
+            const resp = await axios.get(`${baseUrl}/your-team`, { headers: { Authorization: `Bearer ${token}` } })
             const gameplay = resp.data.gameplay
             setTeam(gameplay.team)
             setMoney(gameplay.money)
@@ -33,7 +34,7 @@ export default function Team() {
 
     async function fetchCharacters() {
         try {
-            const resp = await axios.get('/api/characters')
+            const resp = await axios.get(`${baseUrl}/characters`)
             const charactersPlayable = resp.data.filter(character => {
                 return character.isPlayable
             })
@@ -65,7 +66,7 @@ export default function Team() {
             const newLevel = level
             try {
                 const token = localStorage.getItem('token')
-                await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
+                await axios.put(`${baseUrl}/your-team`, { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
             } catch (err) {
@@ -88,7 +89,7 @@ export default function Team() {
         const newLevel = level
         try {
             const token = localStorage.getItem('token')
-            await axios.put('api/your-team', { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
+            await axios.put(`${baseUrl}/your-team`, { newMoney, newStrength, newIntelligence, newTeam, newLevel }, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         } catch (err) {

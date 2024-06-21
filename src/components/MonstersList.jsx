@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { isAdmin } from '../lib/auth'
+import {baseUrl} from '../config'
 
 export default function MonsterList() {
 
@@ -14,7 +15,7 @@ export default function MonsterList() {
     async function fetchMonsters() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await axios.get('/api/monsters', {
+            const resp = await axios.get(`${baseUrl}/monsters`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             setMonsters(resp.data)

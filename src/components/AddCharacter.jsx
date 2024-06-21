@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { isAdmin } from '../lib/auth'
+import { baseUrl } from '../config'
 
 export default function AddCharacter() {
 
@@ -54,7 +55,7 @@ export default function AddCharacter() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            await axios.post('/api/characters', formData, {
+            await axios.post(`${baseUrl}/characters`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             navigate('/characters')
@@ -261,7 +262,7 @@ export default function AddCharacter() {
                         />
                     </div>
                 </div>
-                
+
                 <button className="button is-primary">Submit</button>
             </form>
         </div>

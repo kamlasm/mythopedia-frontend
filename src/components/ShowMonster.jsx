@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getPayload, isAdmin } from '../lib/auth'
+import {baseUrl} from '../config'
 
 export default function Monster() {
 
@@ -16,7 +17,7 @@ export default function Monster() {
     async function fetchMonster() {
       try {
         const token = localStorage.getItem('token')
-        const monsterResp = await axios.get(`/api/monsters/${monsterName}`, {
+        const monsterResp = await axios.get(`${baseUrl}/monsters/${monsterName}`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         getPayload()
@@ -33,7 +34,7 @@ export default function Monster() {
   async function handleDelete() {
     try {
       const token = localStorage.getItem('token')
-      await axios.delete(`/api/monsters/${monsterName}`, {
+      await axios.delete(`${baseUrl}/monsters/${monsterName}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       navigate('/monsters')

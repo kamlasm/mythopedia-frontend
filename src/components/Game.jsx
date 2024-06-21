@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import {baseUrl} from '../config'
 
 export default function Team() {
 
@@ -24,7 +25,7 @@ export default function Team() {
     async function fetchUser() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await axios.get('/api/your-team', {
+            const resp = await axios.get(`${baseUrl}/your-team`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             const gameplay = resp.data.gameplay
@@ -42,7 +43,7 @@ export default function Team() {
     async function fetchMonster() {
         try {
             const token = localStorage.getItem('token')
-            const resp = await axios.get('/api/monster', { headers: { Authorization: `Bearer ${token}` } })
+            const resp = await axios.get(`${baseUrl}/monster`, { headers: { Authorization: `Bearer ${token}` } })
             const data = resp.data
             setMonster(data)
             setIsHidden(true)
@@ -73,7 +74,7 @@ export default function Team() {
             setMoney(newMoney)
             try {
                 const token = localStorage.getItem('token')
-                await axios.put('api/game', { newMoney, newLevel }, {
+                await axios.put(`${baseUrl}/game`, { newMoney, newLevel }, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
             } catch (err) {
@@ -106,7 +107,7 @@ export default function Team() {
         setTeam(newTeam)
         try {
             const token = localStorage.getItem('token')
-            await axios.put('api/your-team', { newMoney, newLevel, newStrength, newIntelligence, newTeam }, {
+            await axios.put(`${baseUrl}/your-team`, { newMoney, newLevel, newStrength, newIntelligence, newTeam }, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         } catch (err) {

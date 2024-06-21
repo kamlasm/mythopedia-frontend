@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { isAdmin } from '../lib/auth'
+import {baseUrl} from '../config'
 
 export default function CharacterList() {
 
@@ -14,7 +15,7 @@ export default function CharacterList() {
 
   async function fetchCharacters() {
     try {
-      const resp = await axios.get('/api/characters')
+      const resp = await axios.get(`${baseUrl}/characters`)
       setCharacters(resp.data)
     } catch (err) {
       const error = err.response.data.message

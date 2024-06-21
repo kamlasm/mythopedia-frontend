@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { isAdmin } from '../lib/auth'
+import {baseUrl} from '../config'
 
 export default function EditCharacter() {
 
@@ -24,7 +25,7 @@ export default function EditCharacter() {
     useEffect(() => {
         async function fetchCharacter() {
             try {
-                const resp = await axios.get(`/api/characters/${characterName}`)
+                const resp = await axios.get(`${baseUrl}/characters/${characterName}`)
                 const data = resp.data
                 setFormData({
                     name: `${data.name}`,
@@ -84,7 +85,7 @@ export default function EditCharacter() {
         setFormData(newFormData)
         try {
             const token = localStorage.getItem('token')
-            await axios.put(`/api/characters/${characterName}`, newFormData, {
+            await axios.put(`${baseUrl}/characters/${characterName}`, newFormData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             navigate(`/characters/${formData.name}`)

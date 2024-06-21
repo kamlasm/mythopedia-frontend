@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import {baseUrl} from '../config'
 
 export default function EditMonster() {
 
@@ -21,7 +22,7 @@ export default function EditMonster() {
         async function fetchMonster() {
             try {
                 const token = localStorage.getItem('token')
-                const resp = await axios.get(`/api/monsters/${monsterName}`, {
+                const resp = await axios.get(`${baseUrl}/monsters/${monsterName}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 const data = resp.data
@@ -51,7 +52,7 @@ export default function EditMonster() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            await axios.put(`/api/monsters/${monsterName}`, formData, {
+            await axios.put(`${baseUrl}/monsters/${monsterName}`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             navigate(`/monsters/${formData.name}`)

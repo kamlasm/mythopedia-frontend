@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import {baseUrl} from '../config'
 
 export default function AddMonster() {
 
@@ -27,7 +28,7 @@ export default function AddMonster() {
         e.preventDefault()
         try {
             const token = localStorage.getItem('token')
-            await axios.post('/api/monsters', formData, {
+            await axios.post(`${baseUrl}/monsters`, formData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             navigate('/monsters')

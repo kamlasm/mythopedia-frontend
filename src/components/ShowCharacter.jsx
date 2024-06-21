@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { getPayload, isAdmin } from '../lib/auth'
+import {baseUrl} from '../config'
 
 export default function Character() {
 
@@ -16,10 +17,10 @@ export default function Character() {
   useEffect(() => {
     async function fetchCharacter() {
       try {
-        const characterResp = await axios.get(`/api/characters/${characterName}`)
+        const characterResp = await axios.get(`${baseUrl}/characters/${characterName}`)
         getPayload()
         setCharacter(characterResp.data)
-        const allCharactersResp = await axios.get('/api/characters')
+        const allCharactersResp = await axios.get(`${baseUrl}/characters`)
         setAllCharacters(allCharactersResp.data)
       } catch (err) {
         const error = err.response.data.message || 'Error fetching character'
@@ -75,7 +76,7 @@ export default function Character() {
   async function handleDelete() {
     try {
       const token = localStorage.getItem('token')
-      await axios.delete(`/api/characters/${characterName}`, {
+      await axios.delete(`${baseUrl}/characters/${characterName}`, {
         headers: { Authorization: `Bearer ${token}` }
       })
       navigate('/characters')
