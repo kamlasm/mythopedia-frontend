@@ -16,6 +16,7 @@ export default function CharacterList() {
   async function fetchCharacters() {
     try {
       const resp = await axios.get(`${baseUrl}/characters`)
+      console.log(resp);
       setCharacters(resp.data)
     } catch (err) {
       const error = err.response.data.message
