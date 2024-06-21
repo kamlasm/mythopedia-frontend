@@ -13,15 +13,15 @@ export default function Home() {
   return <div className="hero is-fullheight-with-navbar home">
     <div className="hero-body">
       <div className="container is-max-desktop has-text-centered home-text-div">
-        <h1 className="title is-1">
+        <h1 className="title is-1 has-text-dark">
           ⚡MYTHOPEDIA⚡
         </h1>
         
         <div className="container has-text-centered">
-          <h1 className="subtitle mb-5 home-subtext">
+          <h1 className="subtitle mb-5 home-subtext has-text-dark">
             Welcome to Mythopedia, the place to learn about Greek mythology.
           </h1>
-          <h1 className="subtitle mb-5 home-subtext">
+          <h1 className="subtitle mb-5 home-subtext has-text-dark">
             If you're up to the challenge, sign up to create a team of gods to battle against the deadliest monsters of Greek mythology.
           </h1>
         </div>
