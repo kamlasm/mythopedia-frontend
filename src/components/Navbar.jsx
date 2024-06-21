@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { getPayload } from '../lib/auth'
 
 export default function Navbar() {
   const location = useLocation()
@@ -22,6 +23,7 @@ export default function Navbar() {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
+            {isLoggedIn && <p>Welcome {getPayload().username}</p>}
             <Link to="/" className="button is-light">Home</Link>
             <Link to="/characters" className="button is-light">Character List</Link>
             {isLoggedIn && <Link to="/monsters" className="button is-light">Monsters</Link>}
