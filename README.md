@@ -20,7 +20,7 @@ A user also has the option to create an account. The user starts with money of 1
 
 **Front-end and back-end**
 
-The application uses separate repositories for the front-end and the back-end - [link to the back-end repository]().
+The application uses separate repositories for the front-end and the back-end - [link to the back-end repository](https://mythopedia-by-k-m.netlify.app/).
 
 - The front-end is built with React and uses axios requests to talk to the back-end.
 
@@ -94,16 +94,16 @@ We used a React component called sweetalert2 to display an exciting overlay duri
 ## Displays from the Application
 
 Home page
-![]()
+![Mythopedia Home Page](assets/Mythopedia-homepage.png)
 
 Character page
-![]()
+![Mythopedia Character Page](assets/Mythopedia-charactersList.png)
 
 Your Team page
-![]()
+![Mythopedia Your Team Page](assets/Mythopedia-yourteam.png)
 
 Game page
-![]()
+![Mythopedia Game Page](assets/Mythopedia-battle-in-progress.png)
 
 ## Technologies Used
 

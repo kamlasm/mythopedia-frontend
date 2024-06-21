@@ -121,12 +121,13 @@ export default function Team() {
     function startBattle() {
         let timerInterval;
         MySwal.fire({
-            title: "<strong>Battle in progress!<strong>",
+            title: "",
             html: <div>
+                <strong className='has-text-dark'>Battle in progress!</strong>
                 <img src="https://i0.wp.com/the-past.com/wp-content/uploads/2021/03/post-1_image0-253-scaled.jpg?resize=400%2C256&ssl=1" />
                 <ul>{team.map(teamMember => {
-                    return <li key={teamMember.name}><strong>{teamMember.name}</strong></li>
-                })}</ul> versus <div><strong>{monster.name}</strong></div>
+                    return <li key={teamMember.name}><strong className="has-text-dark">{teamMember.name}</strong></li>
+                })}</ul> versus <div><strong className='has-text-dark'>{monster.name}</strong></div>
             </div>,
             timer: 3000,
             timerProgressBar: false,

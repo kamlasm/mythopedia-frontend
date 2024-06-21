@@ -33,4 +33,8 @@ img {
 .home-subtext {
     font-weight: bold; 
 }
+.custom-text {
+    color: red; /* Change this to your desired color */
+}
+
 
