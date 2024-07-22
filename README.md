@@ -20,7 +20,7 @@ A user also has the option to create an account. The user starts with money of 1
 
 **Front-end and back-end**
 
-The application uses separate repositories for the front-end and the back-end - [link to the back-end repository](https://mythopedia-by-k-m.netlify.app/).
+The application uses separate repositories for the front-end and the back-end - [link to the back-end repository](https://github.com/kamlasm/mythopedia-backend).
 
 - The front-end is built with React and uses axios requests to talk to the back-end.
 
